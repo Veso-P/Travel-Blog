@@ -1,27 +1,14 @@
 # TravelBlog
+A single page application for reading, commenting, and creating travel blogs. This project (A travel blog) will be created with Angular and FireBase as a back-end.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+## Main Idea
+The application will have two parts:
 
-## Development server
+1) Public part (accessible without authentication). Not authenticated users will be able to visit the main page (where some travel blogs will be displayed), the'trending page' (the first 5 blogs with highest number of likes) and the 'new blogs' page (the newest 5 blogs according to date of creation), and a search functionality - in order to search through the titles of the blog. Not authenticated users will be able to signup and login.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2) Private part (available for registered users). The loggedin users will be able access to main page, the 'trending page', the 'new blogs' page, and a logout page. In addition they will be able to create new blogs, update (edit) their own blogs, and like and comment on others' blogs.
+*at a later starge, I will implement a profile page, where loggedin users will be able to see all their blogs.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
