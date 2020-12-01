@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-success" (click)="onNewBlog()">Create New Blog</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <app-blog-item *ngFor="let blogElement of blogs; let i = index" [blog]="blogElement" [index]="i">
+        </app-blog-item>
+    </div>
+</div>
