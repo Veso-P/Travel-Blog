@@ -11,3 +11,8 @@
 <button class="">Like!</button>
 <hr>
 <textarea name="" id="" cols="150" rows="5">Write a comment ... </textarea>
+<hr>
+<h3>Check the comments:</h3>
+<div *ngIf="selectedBlog.comments.length==0"> No comments yet! Be the first to write!</div>
+<div *ngIf="selectedBlog.comments.length!=0" > <p *ngFor="let comment of selectedBlog.comments">{{comment}}</p>
+</div>
