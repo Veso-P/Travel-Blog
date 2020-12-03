@@ -1,0 +1,13 @@
+<p class="list-group-item-text">{{ selectedBlog['name'] }}</p>
+<hr>
+<span style="width: 30%;">
+    <img [src]="selectedBlog.imagePath" alt="{{ selectedBlog.name }}" class="img-responsive"
+        style="max-height: 720px; min-width: 200;">
+</span>
+<hr>
+
+<p class="list-group-item-text">{{ selectedBlog.description }} </p>
+<hr>
+<button class="">Like!</button>
+<hr>
+<textarea name="" id="" cols="150" rows="5">Write a comment ... </textarea>
