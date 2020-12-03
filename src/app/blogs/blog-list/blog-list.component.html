@@ -4,9 +4,11 @@
     </div>
 </div>
 <hr>
+<input type="text" [(ngModel)]="filteredStatus">
+<hr>
 <div class="row">
     <div class="col-xs-12">
-        <app-blog-item *ngFor="let blogElement of blogs; let i = index" [blog]="blogElement" [index]="i">
+        <app-blog-item *ngFor="let blogElement of blogs | filter: filteredStatus:'name'" [blog]="blogElement">
         </app-blog-item>
     </div>
 </div>

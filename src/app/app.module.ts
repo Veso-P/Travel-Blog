@@ -11,6 +11,8 @@ import { ContactComponent } from './common-pages/contact/contact.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogListComponent } from './blogs/blog-list/blog-list.component';
 import {BlogItemComponent} from './blogs/blog-list/blog-item/blog-item.component'
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from './blogs/blog-list/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import {BlogItemComponent} from './blogs/blog-list/blog-item/blog-item.component
     ContactComponent,
     BlogsComponent,
     BlogListComponent,
-    BlogItemComponent
+    BlogItemComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
