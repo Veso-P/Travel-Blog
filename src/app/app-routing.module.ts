@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
+import { BlogItemComponent } from './blogs/blog-list/blog-item/blog-item.component';
 
 // Components
 import { BlogsComponent } from './blogs/blogs.component';
@@ -13,7 +15,8 @@ import { UserComponent } from './user/user/user.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/blogs', pathMatch: 'full' },
-  { path: 'blogs', component: BlogsComponent, pathMatch: 'full' },
+  { path: 'home', redirectTo: '/blogs', pathMatch: 'full' },
+  
   // General Pages
   { path: 'about', component: AboutComponent, pathMatch: 'full' },
   {path: 'contact', component: ContactComponent, pathMatch: 'full' },
@@ -21,10 +24,14 @@ const appRoutes: Routes = [
   { path: 'user/login', component: LoginComponent, pathMatch: 'full' },
   { path: 'user/logout', component: LogoutComponent, pathMatch: 'full' },
   { path: 'user/register', component: RegisterComponent, pathMatch: 'full' },
-  { path: 'user/profile', component: UserComponent, pathMatch: 'full' },
-  
-  // { path: 'user/profile/:id', component: RegisterComponent, pathMatch: 'full' }
-
+  { path: 'user/profile', component: UserComponent, pathMatch: 'full' },  
+  // { path: 'user/profile/:id', component: RegisterComponent, pathMatch: 'full' },
+  // Aside Pages
+  { path: 'blogs/trending', component: LoginComponent, pathMatch: 'full' },
+  { path: 'blogs/new', component: LoginComponent, pathMatch: 'full' },
+  // Blog Pages
+  { path: 'blogs', component: BlogsComponent, pathMatch: 'full' },
+  { path: 'blogs/:id', component: BlogItemDetailsComponent, pathMatch: 'full' },
 
 ];
 

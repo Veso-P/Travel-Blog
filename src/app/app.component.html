@@ -1,15 +1,14 @@
 <div class="container">
-    <app-header></app-header>
-    <app-aside></app-aside>    
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">     
-               
-          <router-outlet></router-outlet>
-          
-        </div>
-        
+  <app-header></app-header>
+  <app-aside></app-aside>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Here I will route the component of the selected routs -->
+        <router-outlet></router-outlet> 
+
       </div>
     </div>
-    <app-footer></app-footer>
   </div>
+  <app-footer></app-footer>
+</div>

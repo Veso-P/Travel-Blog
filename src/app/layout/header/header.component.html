@@ -2,13 +2,14 @@
     <div class="container-fluid">        
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                <!-- I will be using '/...' paths in order to implement absolute paths -->
                 <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/profile">My Profile</a></li>
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/blogs">Blogs</a></li>
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/blogs">Blogs</a></li>
                 <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/about">About us</a></li>
                 <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/contact">Contact us</a></li>                
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="user/logout">Logout</a></li>
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="user/login">Login</a></li> 
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="user/register">Register</a></li>                 
+                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/logout">Logout</a></li>
+                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/login">Login</a></li> 
+                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/register">Register</a></li>                 
             </ul>                        
         </div>
     </div>

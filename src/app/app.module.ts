@@ -17,6 +17,8 @@ import { UserComponent } from './user/user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { LogoutComponent } from './user/logout/logout.component';
 import { RegisterComponent } from './user/register/register.component';
+import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
+import { BlogService } from './blogs/blog.service';
 
 @NgModule({
   declarations: [
@@ -33,14 +35,15 @@ import { RegisterComponent } from './user/register/register.component';
     UserComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    BlogItemDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [BlogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
