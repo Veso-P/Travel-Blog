@@ -25,8 +25,8 @@ export class BlogListComponent implements OnInit {
     this.blogs = this.blogService.getBlogs();
   }
 
-  onNewBlog() {
-    this.router.navigate(['new'], {relativeTo: this.route});
-  }
+  // onNewBlog() {
+  //   this.router.navigate(['new'], {relativeTo: this.route});
+  // }
 
 }

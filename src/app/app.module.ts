@@ -13,6 +13,10 @@ import { BlogListComponent } from './blogs/blog-list/blog-list.component';
 import {BlogItemComponent} from './blogs/blog-list/blog-item/blog-item.component'
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from './blogs/blog-list/filter.pipe';
+import { UserComponent } from './user/user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { LogoutComponent } from './user/logout/logout.component';
+import { RegisterComponent } from './user/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { FilterPipe } from './blogs/blog-list/filter.pipe';
     BlogsComponent,
     BlogListComponent,
     BlogItemComponent,
-    FilterPipe
+    FilterPipe,
+    UserComponent,
+    LoginComponent,
+    LogoutComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
