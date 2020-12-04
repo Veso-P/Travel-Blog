@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { Blog } from '../../blog.model'
 import { BlogService } from '../../blog.service';
@@ -28,6 +28,19 @@ export class BlogItemDetailsComponent implements OnInit {
     this.selectedBlog = this.blogService.getBlog(this.id)
     console.log('The selected blog is: ' + this.selectedBlog);
 
+    // subscribing to the observable for changes
+    // this.route.params.subscribe(
+    //   (params: Params)=> {
+    //     console.log(params)
+    //   }
+    // );   
+
+  }
+
+  // Add comment functionality integrated. Later, I have to connect the textarea field with the 'Add comment' button.
+  onAddComment() {
+      console.log('You are about to add comment!');
+      this.selectedBlog.comments.push('Added Comment!')
   }
 
 }
