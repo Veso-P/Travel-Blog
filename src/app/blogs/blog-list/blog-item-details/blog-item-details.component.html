@@ -8,7 +8,7 @@
 
 <p class="list-group-item-text">{{ selectedBlog.description }} </p>
 <hr>
-<button class="">Like!</button>
+<button *ngIf="allowEdit" class="" (click)="onEditBlog()">Edit</button>
 <hr>
 <textarea name="" id="" cols="150" rows="5">Write a comment ... </textarea>
 <button (click)='onAddComment()'>Add Comment</button>

@@ -7,9 +7,9 @@
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/blogs">Blogs</a></li>
                 <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/about">About us</a></li>
                 <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/contact">Contact us</a></li>                
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/logout">Logout</a></li>
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/login">Login</a></li> 
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/register">Register</a></li>                 
+                <li routerLinkActive="active"><button style="cursor: pointer;" class="btn btn-default" (click)="onLogout()">Logout</button></li>
+                <li routerLinkActive="active"><button style="cursor: pointer;" class="btn btn-default" routerLink="/user/login">Login</button></li> 
+                <li routerLinkActive="active"><button style="cursor: pointer;" class="btn btn-default"  routerLink="/user/register">Register</button></li>                 
             </ul>                        
         </div>
     </div>

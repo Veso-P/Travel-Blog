@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Blog } from '../../blog.model'
 import { BlogService } from '../../blog.service';
@@ -13,17 +13,20 @@ import { BlogService } from '../../blog.service';
 export class BlogItemDetailsComponent implements OnInit {
   @Input() blog: Blog;
   id: string;
-  selectedBlog
+  selectedBlog;
+  allowEdit: Boolean = true;
 
 
   constructor(private blogService: BlogService,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
   // constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
     console.log('The id is: ' + this.id);
+  
     
     this.selectedBlog = this.blogService.getBlog(this.id)
     console.log('The selected blog is: ' + this.selectedBlog);
@@ -41,6 +44,13 @@ export class BlogItemDetailsComponent implements OnInit {
   onAddComment() {
       console.log('You are about to add comment!');
       this.selectedBlog.comments.push('Added Comment!')
+  }
+
+  onEditBlog() {
+    console.log('You are about to edit the blog with id:' + this.id);
+    this.router.navigate(['edit'], {relativeTo: this.route});
+    //    this.router.navigate(['/blogs', this.id, 'edit']);
+
   }
 
 }
