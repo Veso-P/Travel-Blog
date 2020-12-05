@@ -3,7 +3,7 @@ export class Blog {
   public name: string;
   public description: string;
   public imagePath: string;
-  public comments: Array<string> = [];
+  public comments?: Array<string> = [];
 
   constructor(id: string, name: string, desc: string, imagePath: string, comments: Array<string> = []) {
     this.id = id;

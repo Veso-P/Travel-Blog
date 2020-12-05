@@ -14,7 +14,7 @@ import {FilterPipe} from './filter.pipe'
 export class BlogListComponent implements OnInit {
   filteredStatus = '';
 
-  blogs: Blog[];
+  blogs: Blog[] = [];
 
   constructor(private blogService: BlogService,
               private router: Router,
@@ -23,7 +23,12 @@ export class BlogListComponent implements OnInit {
 
   ngOnInit() {
     //this.blogs = this.blogService.getBlogs();
-    this.blogs = this.blogService.getBlogs();
+    //console.log(typeof this.blogService.getBlogs());
+    this.blogService.getBlogs().subscribe(fetchedBlogs=> {
+      this.blogs = fetchedBlogs;
+      // console.log(typeof fetchedBlogs);
+      // fetchedBlogs.slice();
+    })
   }
 
   
