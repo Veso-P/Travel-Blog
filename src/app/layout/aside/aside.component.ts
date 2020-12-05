@@ -16,6 +16,6 @@ export class AsideComponent implements OnInit {
   }
 
   onNewBlog() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['/blogs/create']);
   }
 }

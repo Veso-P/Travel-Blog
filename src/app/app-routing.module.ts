@@ -15,6 +15,7 @@ import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/bl
 import { BlogItemEditComponent } from './blogs/blog-list/blog-item-edit/blog-item-edit.component';
 import { BlogItemComponent } from './blogs/blog-list/blog-item/blog-item.component';
 import { AuthGuard } from './user/auth-guard.service';
+import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 
 
 const appRoutes: Routes = [
@@ -32,10 +33,13 @@ const appRoutes: Routes = [
   // { path: 'user/profile/:id', component: RegisterComponent, pathMatch: 'full' },
   // Blog Pages
   { path: 'blogs', component: BlogsComponent, pathMatch: 'full', },
-  { path: 'blogs/trending', component: LoginComponent, pathMatch: 'full' },
-  { path: 'blogs/new', component: LoginComponent, pathMatch: 'full' },
+  { path: 'blogs/trending', redirectTo: '/blogs', pathMatch: 'full' },
+  { path: 'blogs/create', component: BlogItemCreateComponent, pathMatch: 'full' },
+  { path: 'blogs/new', redirectTo: '/blogs', pathMatch: 'full' },
   { path: 'blogs/:id', component: BlogItemDetailsComponent, pathMatch: 'full' },
   { path: 'blogs/:id/edit', component: BlogItemEditComponent, pathMatch: 'full' },
+  
+
   // Page Not Found
   {path: '**', component: PageNotFoundComponent}
 

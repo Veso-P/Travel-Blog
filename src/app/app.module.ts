@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {   FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +28,7 @@ import { RegisterComponent } from './user/register/register.component';
 import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
 import { BlogItemEditComponent } from './blogs/blog-list/blog-item-edit/blog-item-edit.component';
 import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-found.component';
+import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 
 
 @NgModule({
@@ -48,13 +49,14 @@ import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-fo
     RegisterComponent,
     BlogItemDetailsComponent,
     BlogItemEditComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    BlogItemCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
-  ],
+    ReactiveFormsModule,    
+    FormsModule  ],
   providers: [BlogService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
