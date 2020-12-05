@@ -10,18 +10,24 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class BlogItemCreateComponent implements OnInit {
   createForm: FormGroup;
+  dataToSend;
 
   constructor() { }
 
   ngOnInit(): void {
     this.createForm = new FormGroup ({
       'name': new FormControl(null, [Validators.required, Validators.minLength(4) ]), //  
-      'imagePath': new FormControl(null, Validators.required),     
+      'imagePath': new FormControl(null, Validators.required),   
+      'description': new FormControl(null, [Validators.required, Validators.minLength(50) ])  
     }) ;
+    this.createForm.valueChanges.subscribe (
+      (value)=> {this.dataToSend = value}
+    )
   }
 
   onCreate () {
-    console.log(this.createForm);
+    console.log(this.dataToSend);
+    this.createForm.reset()
   }
 
 }
