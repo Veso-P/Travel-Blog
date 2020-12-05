@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {map} from 'rxjs/operators'
+
 
 import { Blog } from './blog.model';
 
@@ -11,10 +14,23 @@ export class BlogService {
     new Blog ('3','Varna blog', 'Description of Varna blog', 'https://tse4.mm.bing.net/th?id=OIP.r_as_UDbpl9_vegvB2-tHAEyDL&pid=Api', [])
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getBlogs() {
+    this.http.get('https://my-exam-1e19a.firebaseio.com/blogs.json').pipe(map(responseData => {
+      const blogsArray =[];
+      for (const key in responseData) {
+        if (responseData.hasOwnProperty(key)) {
+          blogsArray.push({...responseData[key], id: key})
+        }
+      }
+      return blogsArray;
+    })).subscribe(fetchedBlogs=> {
+      console.log(fetchedBlogs);
+    })
     return this.blogs.slice();
+    
+
   }
 
   getBlog(index: string) {

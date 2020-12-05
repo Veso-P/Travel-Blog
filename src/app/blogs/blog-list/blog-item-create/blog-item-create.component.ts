@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class BlogItemCreateComponent implements OnInit {
   createForm: FormGroup;
   dataToSend;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.createForm = new FormGroup ({
@@ -27,6 +28,10 @@ export class BlogItemCreateComponent implements OnInit {
 
   onCreate () {
     console.log(this.dataToSend);
+
+    // send HTTP request (subscription is obligatory as it is Observable)
+    this.http.post('https://my-exam-1e19a.firebaseio.com/blogs.json', this.dataToSend ).subscribe(responseData => {console.log(responseData)} )
+
     this.createForm.reset()
   }
 

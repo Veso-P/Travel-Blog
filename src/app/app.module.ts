@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {   FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http'
 
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +57,7 @@ import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,    
-    FormsModule  ],
+    FormsModule, HttpClientModule  ],
   providers: [BlogService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })

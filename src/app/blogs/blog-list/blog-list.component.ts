@@ -22,11 +22,10 @@ export class BlogListComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.blogs = this.blogService.getBlogs();
     this.blogs = this.blogService.getBlogs();
   }
 
-  // onNewBlog() {
-  //   this.router.navigate(['new'], {relativeTo: this.route});
-  // }
+  
 
 }
