@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Blog } from '../../blog.model';
@@ -15,7 +15,7 @@ export class BlogItemCreateComponent implements OnInit {
   dataToSend: Blog;
   createdAt: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.createForm = new FormGroup ({
@@ -34,12 +34,13 @@ export class BlogItemCreateComponent implements OnInit {
 
     this.dataToSend.createdAt = this.createdAt;
     console.log(this.dataToSend);
-    this.dataToSend.comments = [];
+    this.dataToSend.comments = '[]';
 
     // send HTTP request (subscription is obligatory as it is Observable)
     this.http.post<{name: string}>('https://my-exam-1e19a.firebaseio.com/blogs.json', this.dataToSend ).subscribe(responseData => {console.log(responseData)} )
 
     this.createForm.reset()
+    this.router.navigate(['/blogs'])
   }
 
 }

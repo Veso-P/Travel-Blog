@@ -18,7 +18,7 @@ export class BlogService {
   constructor(private http: HttpClient) {}
 
   getBlogs() {
-    return this.http.get<{[key: string]: Blog }>('https://my-exam-1e19a.firebaseio.com/blogs.json')
+    return this.http.get<{[key: string]: Blog }>('/blogs/blogs.json')
     .pipe(map((responseData) => {
       let blogsArray: Blog[] =[];
       for (const key in responseData) {

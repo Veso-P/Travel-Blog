@@ -15,7 +15,7 @@ import { BlogService } from '../../blog.service';
 export class BlogItemDetailsComponent implements OnInit {
   @Input() blog: Blog;
   id: string;
-  selectedBlog;
+  selectedBlog: Blog;
   allowEdit: Boolean = true;
 
 
@@ -29,10 +29,12 @@ export class BlogItemDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
     console.log('The id is: ' + this.id);
+    
 
     this.blogService.getBlogs().subscribe(fetchedBlogs=> {
       this.selectedBlog = fetchedBlogs.find(item => item.id == this.id);
       // console.log(typeof fetchedBlogs);
+      console.log(this.selectedBlog)
       // fetchedBlogs.slice();
     })
   
@@ -51,8 +53,15 @@ export class BlogItemDetailsComponent implements OnInit {
 
   // Add comment functionality integrated. Later, I have to connect the textarea field with the 'Add comment' button.
   onAddComment() {
+    let modifiedArray = JSON.parse(this.selectedBlog.comments);    
+  
+    let comment = 'Just a Comment!';
       console.log('You are about to add comment!');
-      this.selectedBlog.comments.push('Added Comment!')
+      modifiedArray.push(comment);
+    
+    this.selectedBlog.comments=(JSON.stringify(modifiedArray))
+    console.log(this.selectedBlog.comments)
+    this.selectedBlog.comments=JSON.parse(this.selectedBlog.comments)
   }
 
   onEditBlog() {
@@ -66,7 +75,7 @@ export class BlogItemDetailsComponent implements OnInit {
     console.log('You are about to delete the blog with id:' + this.id);
 
     // send HTTP DELETE request (subscription is obligatory as it is Observable)
-    this.http.delete(`https://my-exam-1e19a.firebaseio.com/blogs/${this.id}.json}`).subscribe(responseData => {console.log(responseData)} );
+    this.http.delete(`/blogs/blogs/${this.id}.json`).subscribe(responseData => {console.log(responseData)} );
 
     // this.router.navigate(['edit'], {relativeTo: this.route});
     this.router.navigate(['/blogs'])

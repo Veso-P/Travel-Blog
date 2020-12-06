@@ -1,0 +1,10 @@
+{
+    "/x": {
+        "target": "https://my-exam-1e19a.firebaseio.com",
+        "secure": true,
+        "pathRewrite": {
+            "^/x": ""
+        },
+        "changeOrigin": true
+    }
+}

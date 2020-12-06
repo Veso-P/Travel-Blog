@@ -1,7 +1,7 @@
 <p class="list-group-item-text">{{ selectedBlog['name'] }}</p>
 <hr>
 <span style="width: 30%;">
-    <img [src]="selectedBlog.imagePath" alt="{{ selectedBlog.name }}" class="img-responsive"
+    <img [src]="selectedBlog.imagePath" alt="{{ selectedBlog['name'] }}" class="img-responsive"
         style="max-height: 720px; min-width: 200;">
 </span>
 <hr>
@@ -16,6 +16,6 @@
 <button (click)='onAddComment()'>Add Comment</button>
 <hr>
 <h3>Check the comments:</h3>
-<div *ngIf="selectedBlog.comments.length==0"> No comments yet! Be the first to write!</div>
-<div *ngIf="selectedBlog.comments.length!=0" > <p *ngFor="let comment of selectedBlog.comments">{{comment}}</p>
+<div *ngIf="selectedBlog.comments=='[]'"> No comments yet! Be the first to write!</div>
+<div *ngIf="selectedBlog.comments!='[]'" > <p *ngFor="let comment of selectedBlog.comments">{{comment}}</p>
 </div>
