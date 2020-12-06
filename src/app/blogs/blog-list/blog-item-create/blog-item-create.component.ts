@@ -13,6 +13,7 @@ import { Blog } from '../../blog.model';
 export class BlogItemCreateComponent implements OnInit {
   createForm: FormGroup;
   dataToSend: Blog;
+  createdAt: number;
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +29,12 @@ export class BlogItemCreateComponent implements OnInit {
   }
 
   onCreate () {
+    
+    this.createdAt = Date.now();
+
+    this.dataToSend.createdAt = this.createdAt;
     console.log(this.dataToSend);
+    this.dataToSend.comments = [];
 
     // send HTTP request (subscription is obligatory as it is Observable)
     this.http.post<{name: string}>('https://my-exam-1e19a.firebaseio.com/blogs.json', this.dataToSend ).subscribe(responseData => {console.log(responseData)} )
