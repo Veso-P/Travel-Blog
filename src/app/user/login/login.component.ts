@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       responseData => {
         console.log(responseData);
         this.isLoading = false;
+        this.router.navigate(['/blogs'])
       },
       errorMessage => {
         console.log(errorMessage);
