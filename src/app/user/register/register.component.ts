@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   currentData;
   currentPassword: string = '';
   currentRePassword: string;
-  isLoading:boolean = false;
+  isLoading: boolean = false;
   error: string = null;
 
   constructor(private router: Router, private authService: AuthService) { }
@@ -30,17 +30,17 @@ export class RegisterComponent implements OnInit {
       (value) => {
         this.currentData = value;
         this.currentPassword = this.currentData.password;
-        
+
       }
 
-    )  
+    )
 
   }
 
   passwordMatchValidator(control: FormControl): { [key: string]: boolean } {
     if (control.value != this.currentPassword) {
       return { 'noMatch': true };
-    }    
+    }
   }
 
 
@@ -65,9 +65,9 @@ export class RegisterComponent implements OnInit {
         console.log(responseData);
         this.isLoading = false;
       },
-      error => {
-        console.log(error);
-        this.error='An error occurred!';
+      errorMessage => {
+        console.log(errorMessage);
+        this.error = errorMessage;
         this.isLoading = false;
 
       }

@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { ControlContainer, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,14 +12,15 @@ import { ControlContainer, FormBuilder, FormControl, FormGroup, Validators} from
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  forbiddenUsernames = ['Veso', 'Pesho'];
-  currentUsername = ''
+  currentUsername = '';
+  isLoading: boolean = false;
+  error: string = null;
 
   constructor(private router: Router, private authService: AuthService, formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup ({
-      'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this), Validators.minLength(6) ]), //  
+      'username': new FormControl(null, [Validators.required, Validators.minLength(6)]), //  
       'password': new FormControl(null, [Validators.required, Validators.minLength(6) ])      
     }) ;
 
@@ -29,28 +31,32 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     console.log('You are about to login!');
-    console.log(this.loginForm);
+    console.log(this.loginForm.value);
+
+    const email = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
+
+    console.log(email);
+
+    this.isLoading = true;
+    this.authService.login(email, password)
+.subscribe(
+      responseData => {
+        console.log(responseData);
+        this.isLoading = false;
+      },
+      errorMessage => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
+
+      }
+    );
+
+
     this.loginForm.reset();
+    
+  } 
 
-
-    // this.authService.login();
-
-    // setTimeout(() => {
-    //   this.router.navigate(['/home']);
-    // }, 3000);
-  }
-
-  // usernameLength():{[s: string]: boolean} {
-  //   if (this.currentUsername.length <5){
-  //     //console.log(control.value)
-  //     return {'usernameLengthIsInvalid' : true} 
-  //   }
-  //   //return null;
-  // }
-
-  forbiddenNames (control: FormControl) : {[s: string]: boolean} {
-    if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
-      return {'nameIsForbidden': true}
-    }
-  }
+ 
 }
