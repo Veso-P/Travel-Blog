@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup ({
-      'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this), Validators.minLength(4) ]), //  
-      'password': new FormControl(null, Validators.required)      
+      'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this), Validators.minLength(6) ]), //  
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6) ])      
     }) ;
 
     this.loginForm.valueChanges.subscribe (
@@ -40,13 +40,13 @@ export class LoginComponent implements OnInit {
     // }, 3000);
   }
 
-  usernameLength():{[s: string]: boolean} {
-    if (this.currentUsername.length <5){
-      //console.log(control.value)
-      return {'usernameLengthIsInvalid' : true} 
-    }
-    //return null;
-  }
+  // usernameLength():{[s: string]: boolean} {
+  //   if (this.currentUsername.length <5){
+  //     //console.log(control.value)
+  //     return {'usernameLengthIsInvalid' : true} 
+  //   }
+  //   //return null;
+  // }
 
   forbiddenNames (control: FormControl) : {[s: string]: boolean} {
     if (this.forbiddenUsernames.indexOf(control.value) !== -1) {

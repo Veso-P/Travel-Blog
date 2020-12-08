@@ -10,5 +10,9 @@ The application will have two parts:
 *at a later starge, I will implement a profile page, where loggedin users will be able to see all their blogs.
 
 
+### VERY IMPORTANT!
+To run the project use 'npm start' or 'ng serve --proxy-conig proxy.conf.json'
+In this application FireBase is used as a back-end. To solve the CORS issues a proxy (proxy.conf.json) is used.
+
 
 

@@ -19,7 +19,7 @@ export class BlogItemCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm = new FormGroup ({
-      'name': new FormControl(null, [Validators.required, Validators.minLength(4) ]), //  
+      'name': new FormControl(null, [Validators.required, Validators.minLength(6) ]), //  
       'imagePath': new FormControl(null, Validators.required),   
       'description': new FormControl(null, [Validators.required, Validators.minLength(50) ])  
     }) ;
@@ -34,7 +34,7 @@ export class BlogItemCreateComponent implements OnInit {
 
     this.dataToSend.createdAt = this.createdAt;
     console.log(this.dataToSend);
-    this.dataToSend.comments = '[]';
+    // this.dataToSend.comments = ['first comment', 'second comment'];
 
     // send HTTP request (subscription is obligatory as it is Observable)
     this.http.post<{name: string}>('https://my-exam-1e19a.firebaseio.com/blogs.json', this.dataToSend ).subscribe(responseData => {console.log(responseData)} )

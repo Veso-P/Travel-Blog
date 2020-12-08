@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {   FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http'
 
 // Routing Module
@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FilterPipe } from './blogs/blog-list/filter.pipe';
 import { BlogService } from './blogs/blog.service';
 import { AuthService } from './user/auth.service';
-import { AuthGuard } from './user/auth-guard.service';
+//import { AuthGuard } from './user/auth-guard.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -30,6 +30,7 @@ import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/bl
 import { BlogItemEditComponent } from './blogs/blog-list/blog-item-edit/blog-item-edit.component';
 import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-found.component';
 import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 
 @NgModule({
@@ -51,14 +52,16 @@ import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog
     BlogItemDetailsComponent,
     BlogItemEditComponent,
     PageNotFoundComponent,
-    BlogItemCreateComponent
+    BlogItemCreateComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,    
-    FormsModule, HttpClientModule  ],
-  providers: [BlogService, AuthService, AuthGuard],
+    FormsModule, 
+    HttpClientModule],
+  providers: [BlogService, AuthService,], // AuthGuard
   bootstrap: [AppComponent]
 })
 export class AppModule { }

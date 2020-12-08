@@ -14,7 +14,7 @@ import { UserComponent } from './user/user/user.component';
 import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
 import { BlogItemEditComponent } from './blogs/blog-list/blog-item-edit/blog-item-edit.component';
 import { BlogItemComponent } from './blogs/blog-list/blog-item/blog-item.component';
-import { AuthGuard } from './user/auth-guard.service';
+// import { AuthGuard } from './user/auth-guard.service';
 import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 
 
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
   { path: 'user/login', component: LoginComponent, pathMatch: 'full' },
   { path: 'user/logout', component: LogoutComponent, pathMatch: 'full' },
   { path: 'user/register', component: RegisterComponent, pathMatch: 'full' },
-  { path: 'user/profile', canActivate: [AuthGuard], component: UserComponent, pathMatch: 'full' },
+  { path: 'user/profile', component: UserComponent, pathMatch: 'full' },
   // { path: 'user/profile/:id', component: RegisterComponent, pathMatch: 'full' },
   // Blog Pages
   { path: 'blogs', component: BlogsComponent, pathMatch: 'full', },

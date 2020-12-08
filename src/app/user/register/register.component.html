@@ -1,17 +1,23 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+            <div class="alert alert-danger" *ngIf="error">
+                {{error}}
+            </div>
+            <div *ngIf="isLoading" style="text-align: center;">
+                <app-spinner></app-spinner>
+            </div>
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!isLoading">
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">Email</label>
                     <input type="text" id="username"
                     formControlName="username" class="form-control">
-                    <span *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched" class="help-block" style="color:red;">Please enter a valid username!</span>
+                    <span *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched" class="help-block" style="color:red;">Please enter a valid email at least 6 characters long!</span>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="text" id="password" formControlName="password" class="form-control">
-                    <span *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched" class="help-block" style="color:red;">Please enter a valid password!</span>
+                    <span *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched" class="help-block" style="color:red;">Please enter a valid password at least 6 characters long!</span>
                 </div>
                 <div class="form-group">
                     <label for="rePassword">Repeated Password</label>
@@ -19,8 +25,10 @@
                     <span *ngIf="!registerForm.get('rePassword').valid && registerForm.get('rePassword').touched" class="help-block" style="color:red;">Passwords should match!</span>
                 </div>
 
-                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-primary" type="submit" [disabled]="registerForm.status == 'INVALID' ">Register</button>
             </form>
         </div>
     </div>
+    
+    
 </div>
