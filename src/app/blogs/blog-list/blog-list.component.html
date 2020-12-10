@@ -1,9 +1,12 @@
-
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-spinner></app-spinner>
+</div>
 <hr>
+<label for="">Search for: </label>
 <input type="text" [(ngModel)]="filteredStatus">
 <hr>
 <div class="row">
-    <div class="col-xs-12">
+    <div style="width: 80%;">
         <app-blog-item *ngFor="let blogElement of blogs | filter: filteredStatus:'name'" [blog]="blogElement">
         </app-blog-item>
     </div>

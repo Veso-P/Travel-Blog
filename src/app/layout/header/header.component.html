@@ -1,16 +1,34 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">        
+<nav class="navbar navbar-default" style="width: 100%;">
+    <div class="container-fluid">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <!-- I will be using '/...' paths in order to implement absolute paths -->
-                <li routerLinkActive="active" *ngIf="isAuthenticated"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/profile" >My Profile</a></li>
-                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/blogs">Blogs</a></li>
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/about">About us</a></li>
-                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle" routerLink="/contact">Contact us</a></li>                
-                <li routerLinkActive="active" *ngIf="isAuthenticated"> | <button style="cursor: pointer;" class="btn btn-default" (click)="onLogout()" class="btn btn-secondary">Logout</button> | </li>
-                <li routerLinkActive="active" *ngIf="!isAuthenticated"> | <button style="cursor: pointer;" class="btn btn-default" routerLink="/user/login" class="btn btn-success">Login</button> </li> 
-                <li routerLinkActive="active" *ngIf="!isAuthenticated"> | <button style="cursor: pointer;" class="btn btn-default"  routerLink="/user/register" class="btn btn-primary">Register</button> | </li>                 
-            </ul>                        
+                <li routerLinkActive="active" *ngIf="isAuthenticated"><a style="cursor: pointer;"
+                        class="dropdown-toggle" routerLink="/user/profile">My Profile</a></li>
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a style="cursor: pointer;"
+                        class="dropdown-toggle" routerLink="/blogs">Blogs</a></li>
+                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle"
+                        routerLink="/about">About us</a></li>
+                <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle"
+                        routerLink="/contact">Contact us</a></li>
+                <li style="width: 300px;">               </li>
+                <li routerLinkActive="active" *ngIf="isAuthenticated"> | <button style="cursor: pointer;"
+                        class="btn btn-default" (click)="onLogout()" class="btn btn-secondary">Logout</button> | </li>
+                <li routerLinkActive="active" *ngIf="!isAuthenticated"> | <button style="cursor: pointer;"
+                        class="btn btn-default" routerLink="/user/login" class="btn btn-success">Login</button> </li>
+                <li routerLinkActive="active" *ngIf="!isAuthenticated"> | <button style="cursor: pointer;"
+                        class="btn btn-default" routerLink="/user/register" class="btn btn-primary">Register</button> |
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-1">
+            <div class="alert alert-danger" *ngIf="isLoggingout">
+                You are logging out!
+            </div>
+        </div>
+    </div>
+</div>

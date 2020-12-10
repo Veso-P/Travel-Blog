@@ -1,1 +1,33 @@
-<p>Profile page!</p>
+<div class="col-xs-12" *ngIf="data.length==0">
+  <h3>You have no posts!</h3>            
+</div>
+<div class="row" *ngIf="data.length>0">
+    <h3>This is the list of your posts:</h3>
+    <div class="col-md-5">
+        <!-- <hr>
+        <input type="text" [(ngModel)]="filteredStatus">
+        <hr> -->
+        <div class="row">
+          
+
+            <div class="col-xs-12" >
+                <!-- <div *ngFor="let blogElement of blogs | filter: filteredStatus:'name'" [blog]="blogElement">
+                </div> -->
+                <div *ngFor="let blogElement of data">
+                    <a style="cursor: pointer;" [routerLink]="['/blogs/' + blogElement.id]" routerLinkActive="active" class="list-group-item clearfix">
+                        <div class="pull-left">
+                          <h4 class="list-group-item-heading">{{ blogElement.name }}</h4>
+                          <p class="list-group-item-date">{{ blogElement.createdAt | date:"medium" }}</p>
+                          <p class="list-group-item-text">{{ blogElement.description | uppercase }}</p>
+                          
+                      
+                        </div>
+                        <span class="pull-right">
+                          <img [src]="blogElement.imagePath" alt="{{ blogElement.name }}" class="img-responsive" style="max-height: 150px; min-width: 200;">
+                        </span>
+                      </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

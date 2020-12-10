@@ -13,6 +13,7 @@ import {FilterPipe} from './filter.pipe'
 })
 export class BlogListComponent implements OnInit {
   filteredStatus = '';
+  isLoading: boolean = false;
 
   blogs: Blog[] = [];
 
@@ -22,10 +23,12 @@ export class BlogListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     //this.blogs = this.blogService.getBlogs();
     //console.log(typeof this.blogService.getBlogs());
     this.blogService.getBlogs().subscribe(fetchedBlogs=> {
       this.blogs = fetchedBlogs;
+      this.isLoading = false;
       // console.log(typeof fetchedBlogs);
       // fetchedBlogs.slice();
     })

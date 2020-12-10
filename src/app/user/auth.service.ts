@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { throwError, Subject, BehaviorSubject } from 'rxjs';
+
+
 import { User } from './user.model';
 
 
@@ -20,33 +23,35 @@ interface AuthResponseData {
 export class AuthService {
     loggedIn = false; // I am not using it now;
 
-    user = new Subject<User>()
+    user = new BehaviorSubject<User>(null);
+    token: string = null;
 
+    private tokenExpirationTimer: any;
 
-
-    // isAuthenticated () {
-    //     const promise = new Promise ( 
-    //         (resolve, reject)=> {
-    //             setTimeout(() => {
-    //                 resolve(this.loggedIn)
-    //             }, 4000);
-    //         }
-    //     );
-    //     return promise;
-    // }
-
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router,) {
 
     }
 
     logout() {
         console.log('You are going to logout!')
-        this.loggedIn = false;
+        this.router.navigate['/blogs'];
+
+        setTimeout(() => {
+            this.user.next(null);
+            // After logout redirection to main page.
+            localStorage.removeItem('userInfo');
+        }, 500);
+
+        if (this.tokenExpirationTimer) {
+            clearTimeout(this.tokenExpirationTimer);
+        }
+        this.tokenExpirationTimer = null;
+
     }
 
     register(email: string, password: string) {
         return this.http.
-            post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[KEY]',
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${addKey}`,
                 {
                     email: email,
                     password: password,
@@ -77,13 +82,15 @@ export class AuthService {
         const expirationDate = new Date(new Date().getTime() + Number(expiresIn) * 1000);
         const user = new User(email, userId, token, expirationDate);
         this.user.next(user);
+        this.autoLogout(expiresIn * 1000)
+        localStorage.setItem('userInfo', JSON.stringify(user)); //Using logacl storage for the user
 
     }
 
     login(email: string, password: string) {
         console.log('You are going to login!')
         return this.http.
-            post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[KEY]',
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${addKey}`,
                 {
                     email: email,
                     password: password,
@@ -108,4 +115,47 @@ export class AuthService {
             );
 
     }
+
+    autoLogin() {
+        const userInfo: {
+            email: string;
+            id: string;
+            _token: string;
+            _tokenExpiration: string;
+        } = JSON.parse(localStorage.getItem('userInfo'));
+
+        if (!userInfo) {
+            console.log('You are here in the AUTO LOGIN!');
+            return;
+        }
+
+        const loadedUser = new User(userInfo.email, userInfo.id, userInfo._token, new Date(userInfo._tokenExpiration));
+        if (loadedUser.token) {
+
+            this.user.next(loadedUser);
+            const expirationDuration = new Date(userInfo._tokenExpiration).getTime() - new Date().getTime();
+            this.autoLogout(expirationDuration);
+        }
+
+
+    }
+
+    autoLogout(expirationTime: number) {
+        this.tokenExpirationTimer = setTimeout(() => {
+            this.logout();
+        }, expirationTime)
+    }
+
 }
+
+
+// // isAuthenticated () {
+    //     const promise = new Promise ( 
+    //         (resolve, reject)=> {
+    //             setTimeout(() => {
+    //                 resolve(this.loggedIn)
+    //             }, 4000);
+    //         }
+    //     );
+    //     return promise;
+    // }

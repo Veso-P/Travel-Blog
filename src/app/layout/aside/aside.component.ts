@@ -20,8 +20,8 @@ export class AsideComponent implements OnInit {
   ngOnInit(): void {
     this.userSubscription = this.authService.user.subscribe(user => {
       this.isAuthenticated = !user ? false : true;
-      console.log('Data about the user:');
-      console.log(user);
+      //console.log('Data about the user:');
+      //console.log(user);
     })
   }
 

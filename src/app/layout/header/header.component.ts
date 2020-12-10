@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/user/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  isLoggingout = false;
   isAuthenticated = false;
   private userSubscription : Subscription;
 
@@ -20,11 +21,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isAuthenticated = !user ? false : true;
       console.log('Data about the user:');
       console.log(user);
+      //this.router.navigate(['/blogs']);
+      
     })
   }
 
   onLogout() {
-    this.authService.logout();
+    this.isLoggingout = true;
+      setTimeout(()=> {
+        this.isLoggingout = false;
+        this.authService.logout();
+      }, 2500)
+    
   }
 
   ngOnDestroy() {

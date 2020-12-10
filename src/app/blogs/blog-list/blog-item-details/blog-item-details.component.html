@@ -1,20 +1,36 @@
-<p class="list-group-item-text">{{ selectedBlog.name }}</p>
-<hr>
-<span style="width: 30%;">
-    <img [src]="selectedBlog.imagePath" alt="loading ..." class="img-responsive"
-        style="max-height: 720px; min-width: 200;">
-</span>
-<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-1">
+            <div class="alert alert-danger" *ngIf="isDeleted">
+                The blog was successfully deleted!
+            </div>
+            <div *ngIf="isLoading" style="text-align: center;">
+                <app-spinner></app-spinner>
+            </div>
+            <p class="list-group-item-text">{{ selectedBlog.name }}</p>
+            <hr>
+            <span style="width: 30%;">
+                <img [src]="selectedBlog.imagePath" alt="loading ..." class="img-responsive"
+                    style="max-height: 720px; min-width: 200;">
+            </span>
+            <hr>
 
-<p class="list-group-item-text">{{ selectedBlog.description }} </p>
-<hr>
-<button *ngIf="allowEdit" class="btn btn-primary" (click)="onEditBlog()">Edit</button> 
- | 
-<button *ngIf="allowEdit" class="btn btn btn-danger" (click)="onDeleteBlog()">Delete</button>
-<hr>
-<textarea name="comment"  cols="150" rows="5">Write a comment ... </textarea>
-<button (click)='onAddComment()'>Add Comment</button>
-<hr>
-<h3>Check the comments:</h3>
-<div *ngIf="!selectedBlog.hasOwnProperty('comments') || selectedBlog.comments.length == 0 "> No comments yet! Be the first to write!</div>
-<div *ngIf="selectedBlog.hasOwnProperty('comments') && selectedBlog.comments.length>0" > <p *ngFor="let comment of selectedBlog.comments">{{comment}}</p> </div>
+            <p class="list-group-item-text">{{ selectedBlog.description }} </p>
+            <hr>
+            <button *ngIf="allowEdit" class="btn btn-primary" (click)="onEditBlog()">Edit</button>
+            |
+            <button *ngIf="allowEdit" class="btn btn btn-danger" (click)="onDeleteBlog()">Delete</button>
+            <hr>
+            <textarea name="comment" cols="150" rows="5">Write a comment ... </textarea>
+            <button (click)='onAddComment()'>Add Comment</button>
+            <hr>
+            <h3>Check the comments:</h3>
+            <div *ngIf="!selectedBlog.hasOwnProperty('comments') || selectedBlog.comments.length == 0 "> No comments
+                yet! Be the first to write!</div>
+            <div *ngIf="selectedBlog.hasOwnProperty('comments') && selectedBlog.comments.length>0">
+                <p *ngFor="let comment of selectedBlog.comments">{{comment}}</p>
+            </div>
+
+        </div>
+    </div>
+</div>

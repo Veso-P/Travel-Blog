@@ -1,10 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { take } from 'rxjs/operators'
+
 
 
 import { Blog } from '../../blog.model'
 import { BlogService } from '../../blog.service';
+import { AuthService } from 'src/app/user/auth.service';
+
 
 
 @Component({
@@ -17,28 +21,31 @@ export class BlogItemDetailsComponent implements OnInit {
   id: string;
   selectedBlog: Blog;
   allowEdit: Boolean = true;
+  isLoading: boolean = false;
+  isDeleted: boolean = false;
 
 
   constructor(private blogService: BlogService,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
   // constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
     //console.log('The id is: ' + this.id);
-    
 
-    this.blogService.getBlogs().subscribe(fetchedBlogs=> {
+
+    this.blogService.getBlogs().subscribe(fetchedBlogs => {
       this.selectedBlog = fetchedBlogs.find(item => item.id == this.id);
       // console.log(typeof fetchedBlogs);
       console.log(this.selectedBlog)
       // fetchedBlogs.slice();
     })
-  
-    
+
+
     // this.selectedBlog = this.blogService.getBlog(this.id)
     // console.log('The selected blog is: ' + this.selectedBlog);
 
@@ -54,16 +61,16 @@ export class BlogItemDetailsComponent implements OnInit {
   // Add comment functionality integrated. Later, I have to connect the textarea field with the 'Add comment' button.
   onAddComment() {
     // let modifiedArray = JSON.parse(this.selectedBlog.comments);    
-  
+
     let comment = 'Just a Comment!';
-      console.log('You are about to add comment!');
-      //modifiedArray.push(comment);
-    
-      if (this.selectedBlog.hasOwnProperty('comments')) {
-        this.selectedBlog.comments.push(comment);
-      } else {
-        this.selectedBlog.comments = [comment];
-      }
+    console.log('You are about to add comment!');
+    //modifiedArray.push(comment);
+
+    if (this.selectedBlog.hasOwnProperty('comments')) {
+      this.selectedBlog.comments.push(comment);
+    } else {
+      this.selectedBlog.comments = [comment];
+    }
     // this.selectedBlog.comments=(JSON.stringify(modifiedArray))
     // console.log(this.selectedBlog.comments)
     // this.selectedBlog.comments=JSON.parse(this.selectedBlog.comments)
@@ -71,19 +78,41 @@ export class BlogItemDetailsComponent implements OnInit {
 
   onEditBlog() {
     //console.log('You are about to edit the blog with id:' + this.id);
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
     //    this.router.navigate(['/blogs', this.id, 'edit']);
 
   }
 
   onDeleteBlog() {
     //console.log('You are about to delete the blog with id:' + this.id);
+    this.isLoading = true;
+
 
     // send HTTP DELETE request (subscription is obligatory as it is Observable)
-    this.http.delete(`/blogs/blogs/${this.id}.json`).subscribe(responseData => {console.log(responseData)} );
+    // this.http.delete(`/blogs/blogs/${this.id}.json`).subscribe(responseData => {console.log(responseData)} ); // used for testing!
+
+    //////
+    this.authService.user.pipe(take(1)).subscribe(user => {
+      console.log(user);
+
+      this.http.delete(`/blogs/blogs/${this.id}.json?auth=` + user.token).subscribe(responseData => {
+        console.log(responseData);
+        
+        this.isDeleted = true;
+
+        setTimeout(() => {
+          this.isDeleted = false;
+          this.isLoading = false;
+          this.router.navigate(['/blogs'])
+        }, 2500);
+      });
+    })
+
+
+    ////
 
     // this.router.navigate(['edit'], {relativeTo: this.route});
-    this.router.navigate(['/blogs'])
+    //this.router.navigate(['/blogs'])
 
   }
 

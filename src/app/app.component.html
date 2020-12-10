@@ -1,14 +1,22 @@
-<div class="container">
+<body>
   <app-header></app-header>
-  <app-aside></app-aside>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <!-- Here I will route the component of the selected routs -->
-        <router-outlet></router-outlet> 
+  <main>
+    <app-aside></app-aside>
+    <section style="width: 90%; display:inline-block;
+    vertical-align: top;">
+      <div class="container">
+        <div class="row">
+          <div>
+            <!-- Here I will route the component of the selected routs -->
+            <router-outlet></router-outlet>
 
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
+
+
+  </main>
   <app-footer></app-footer>
-</div>
+
+  <body>

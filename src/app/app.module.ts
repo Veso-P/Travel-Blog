@@ -10,7 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { FilterPipe } from './blogs/blog-list/filter.pipe';
 import { BlogService } from './blogs/blog.service';
 import { AuthService } from './user/auth.service';
-//import { AuthGuard } from './user/auth-guard.service';
+import { AuthGuard } from './user/auth-guard.service';
+import { AuthGuardTwo } from './user/auth-guard-two.service';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -24,7 +26,6 @@ import { BlogListComponent } from './blogs/blog-list/blog-list.component';
 import { BlogItemComponent } from './blogs/blog-list/blog-item/blog-item.component';
 import { UserComponent } from './user/user/user.component';
 import { LoginComponent } from './user/login/login.component';
-import { LogoutComponent } from './user/logout/logout.component';
 import { RegisterComponent } from './user/register/register.component';
 import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
 import { BlogItemEditComponent } from './blogs/blog-list/blog-item-edit/blog-item-edit.component';
@@ -47,7 +48,6 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     FilterPipe,
     UserComponent,
     LoginComponent,
-    LogoutComponent,
     RegisterComponent,
     BlogItemDetailsComponent,
     BlogItemEditComponent,
@@ -61,7 +61,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     ReactiveFormsModule,    
     FormsModule, 
     HttpClientModule],
-  providers: [BlogService, AuthService,], // AuthGuard
+  providers: [BlogService, AuthService, AuthGuard, AuthGuardTwo], // 
   bootstrap: [AppComponent]
 })
 export class AppModule { }
