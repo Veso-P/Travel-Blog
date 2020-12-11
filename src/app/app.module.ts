@@ -28,7 +28,6 @@ import { UserComponent } from './user/user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
-import { BlogItemEditComponent } from './blogs/blog-list/blog-item-edit/blog-item-edit.component';
 import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-found.component';
 import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
@@ -50,7 +49,6 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     LoginComponent,
     RegisterComponent,
     BlogItemDetailsComponent,
-    BlogItemEditComponent,
     PageNotFoundComponent,
     BlogItemCreateComponent,
     SpinnerComponent

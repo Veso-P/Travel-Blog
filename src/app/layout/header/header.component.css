@@ -1,0 +1,10 @@
+.has-user .form-control-feedback {
+    right: initial;
+    left: 0;
+    color: #ccc;
+}
+
+.has-user .form-control {
+    padding-right: 12px;
+    padding-left: 34px;
+}

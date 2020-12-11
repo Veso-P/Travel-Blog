@@ -11,13 +11,15 @@ import { Blog } from 'src/app/blogs/blog.model';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  data: Blog[] = [];
+  data: Blog[];
   info: string;
+  isLoading:boolean =false;
 
   constructor(private blogService: BlogService) { }
 
   ngOnInit(): void {
     this.info = localStorage.getItem('userInfo'); 
+    this.isLoading=true;
 
     console.log('The user is: ')
      let userId = JSON.parse(this.info).id;
@@ -27,6 +29,7 @@ export class UserComponent implements OnInit {
      let sortedByCreator = fetchedBlogs.filter(a => a.creator == userId);
           this.data = sortedByCreator;
           console.log('The data is: ' + this.data.length);
+        this.isLoading=false;
     //  this.data = fetchedBlogs;
     //  console.log(sortedByCreator)
     //  console.log(typeof fetchedBlogs);

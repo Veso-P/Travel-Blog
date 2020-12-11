@@ -4,8 +4,9 @@ export class Blog {
   public description: string;
   public imagePath: string;  
   public createdAt: number;
+  public creator: string;
   public comments?: Array<string>; //for now I will leave the comments prop to be optional
-  public creator?: string;
+  
 
   constructor(id: string, name: string, desc: string, imagePath: string, comments: Array<string>, createdAt: number, creator: string) {
     this.id = id;
@@ -13,7 +14,7 @@ export class Blog {
     this.description = desc;
     this.imagePath = imagePath;   
     this.createdAt = createdAt;
-    this.comments = comments;
     this.creator = creator;
+    this.comments = comments;
   }
 }

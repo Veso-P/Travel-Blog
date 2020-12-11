@@ -26,7 +26,7 @@ export class AsideComponent implements OnInit {
   }
 
   onNewBlog() {
-    this.router.navigate(['/blogs/create']);
+    this.router.navigate(['/create']);
   }
 
   ngOnDestroy() {

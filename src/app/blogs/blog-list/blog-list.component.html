@@ -2,8 +2,16 @@
     <app-spinner></app-spinner>
 </div>
 <hr>
-<label for="">Search for: </label>
-<input type="text" [(ngModel)]="filteredStatus">
+<!--Grid row-->
+<div class="form-group has-feedback has-search" style="width: 40%;">
+    <span class="glyphicon glyphicon-search form-control-feedback "></span>
+    <input [(ngModel)]="filteredStatus" type="text" class="form-control" placeholder="Search">
+  </div>
+<!--Grid row-->
+
+<!-- Old Search Field -->
+<!-- <label for="">Search for: </label>
+<input type="text" [(ngModel)]="filteredStatus"> -->
 <hr>
 <div class="row">
     <div style="width: 80%;">

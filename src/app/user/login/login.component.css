@@ -1,0 +1,15 @@
+.has-envelope .form-control-feedback {
+    right: initial;
+    left: 0;
+    color: #ccc;
+}
+
+.has-envelope .form-control {
+    padding-right: 12px;
+    padding-left: 34px;
+}
+
+.has-wrench .form-control {
+    padding-right: 12px;
+    padding-left: 34px;
+}

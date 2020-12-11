@@ -5,23 +5,29 @@
                 {{error}}
             </div>
             <div class="alert alert-success" role="alert" *ngIf="isLogging">
-                You are logging in!    
+                You are logging in!
             </div>
             <div *ngIf="isLoading" style="text-align: center;">
                 <app-spinner></app-spinner>
             </div>
             <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                <div class="form-group">
+                <!--Grid row-->
+               
+                <!--Grid row-->
+                <div class="form-group has-feedback has-envelope" style="width: 75%;">
                     <label for="username">Email</label>
-                    <input type="text" id="username" formControlName="username" class="form-control">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback "></span>
+                    <input type="text" id="username" formControlName="username" class="form-control" placeholder="email">
                     <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched"
                         class="help-block" style="color:red;">Please enter a valid email!</span>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-feedback has-envelope" style="width: 75%;">
                     <label for="password">Password</label>
-                    <input type="text" id="password" formControlName="password" class="form-control">
+                    <span class="glyphicon glyphicon-wrench form-control-feedback" ></span>
+
+                    <input type="text" id="password" formControlName="password" class="form-control" placeholder="password">
                     <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched"
-                        class="help-block" style="color:red;">Please enter a valid password!</span>
+                        class="help-block" style="color:red;" >Please enter a valid password!</span>
                 </div>
                 <button class="btn btn-primary" type="submit" [disabled]="loginForm.status == 'INVALID'">Login</button>
             </form>

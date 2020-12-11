@@ -2,13 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs/operators'
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 import { Blog } from '../../blog.model'
 import { BlogService } from '../../blog.service';
 import { AuthService } from 'src/app/user/auth.service';
-
 
 
 @Component({
@@ -20,9 +19,17 @@ export class BlogItemDetailsComponent implements OnInit {
   @Input() blog: Blog;
   id: string;
   selectedBlog: Blog;
-  allowEdit: Boolean = true;
+  allowComment: Boolean = false;
+  allowEdit: Boolean = false;
   isLoading: boolean = false;
-  isDeleted: boolean = false;
+  isDeleted: boolean = false;  
+  pleaseEdit: boolean = false;
+  buttonName: string = 'Edit';
+
+  //Details of Edit form
+  editForm: FormGroup;
+  dataToSend: Blog;
+  updateToSend: {};
 
 
   constructor(private blogService: BlogService,
@@ -35,13 +42,37 @@ export class BlogItemDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
+
     //console.log('The id is: ' + this.id);
+    let userId = '';
+    let info =JSON.parse(localStorage.getItem('userInfo'));
+    if (info && info.hasOwnProperty('id')){
+      userId = info.id;
+      console.log('The user is: ' + userId);
 
-
+    }    
+    
     this.blogService.getBlogs().subscribe(fetchedBlogs => {
       this.selectedBlog = fetchedBlogs.find(item => item.id == this.id);
       // console.log(typeof fetchedBlogs);
       console.log(this.selectedBlog)
+      if (this.selectedBlog.creator == userId){
+        this.allowEdit = true;
+      }
+
+      this.editForm = new FormGroup({
+        'name': new FormControl(this.selectedBlog.name, [Validators.required, Validators.minLength(6)]), //  
+        'imagePath': new FormControl(this.selectedBlog.imagePath, Validators.required),
+        'description': new FormControl(this.selectedBlog.description, [Validators.required, Validators.minLength(50)])
+
+  
+  
+      });
+
+      
+      this.editForm.valueChanges.subscribe(
+        (value) => { this.dataToSend = value }
+      );
       // fetchedBlogs.slice();
     })
 
@@ -55,6 +86,9 @@ export class BlogItemDetailsComponent implements OnInit {
     //     console.log(params)
     //   }
     // );   
+   
+    
+
 
   }
 
@@ -77,10 +111,12 @@ export class BlogItemDetailsComponent implements OnInit {
   }
 
   onEditBlog() {
-    //console.log('You are about to edit the blog with id:' + this.id);
-    this.router.navigate(['edit'], { relativeTo: this.route });
-    //    this.router.navigate(['/blogs', this.id, 'edit']);
-
+    this.pleaseEdit=!this.pleaseEdit;
+    if(this.pleaseEdit == true) {
+      this.buttonName = "Cancel Editing!"
+    } else {
+      this.buttonName = 'Edit';
+    }
   }
 
   onDeleteBlog() {
@@ -103,7 +139,7 @@ export class BlogItemDetailsComponent implements OnInit {
         setTimeout(() => {
           this.isDeleted = false;
           this.isLoading = false;
-          this.router.navigate(['/blogs'])
+          this.router.navigate(['/user/profile'])
         }, 2500);
       });
     })
@@ -113,6 +149,41 @@ export class BlogItemDetailsComponent implements OnInit {
 
     // this.router.navigate(['edit'], {relativeTo: this.route});
     //this.router.navigate(['/blogs'])
+
+  }
+
+
+  sendEdit() {
+    console.log('You are going to update the blog!')
+    console.log(this.editForm.value);
+    this.updateToSend=this.editForm.value;
+
+    this.isLoading = true; 
+    
+       // this.dataToSend.comments = ['first comment', 'second comment'];
+    this.authService.user.pipe(take(1)).subscribe(user => {
+      console.log(user);
+      this.http.patch<{}>(`https://my-exam-1e19a.firebaseio.com/blogs/${this.selectedBlog.id}.json?auth=` + user.token, this.updateToSend).subscribe(responseData => {
+        console.log(`this is the response of the update:`)
+        console.log(responseData);
+        
+        this.selectedBlog.name = this.editForm.value.name;
+        this.selectedBlog.description=this.editForm.value.description;
+        this.selectedBlog.imagePath=this.editForm.value.imagePath;
+        this.isLoading = false;
+        this.pleaseEdit = !this.pleaseEdit;
+       
+       this.router.navigate(['/blogs/'+this.selectedBlog.id])
+       
+      })
+      
+    })
+
+    // send HTTP request (subscription is obligatory as it is Observable)
+
+
+    // this.createForm.reset()
+    // // to be removed in the HTTP request
 
   }
 
