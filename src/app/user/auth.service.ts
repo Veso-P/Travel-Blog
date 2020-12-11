@@ -51,7 +51,7 @@ export class AuthService {
 
     register(email: string, password: string) {
         return this.http.
-            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?[ADDYOURKEY]`,
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?[ADDYOURKEY!]`,
                 {
                     email: email,
                     password: password,
@@ -90,7 +90,7 @@ export class AuthService {
     login(email: string, password: string) {
         console.log('You are going to login!')
         return this.http.
-            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?[ADDYOURKEY]`,
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?[ADDYOURKEY!]`,
                 {
                     email: email,
                     password: password,

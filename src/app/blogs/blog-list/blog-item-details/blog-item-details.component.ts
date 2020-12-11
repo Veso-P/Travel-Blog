@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs/operators'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 
 import { Blog } from '../../blog.model'
@@ -26,10 +27,20 @@ export class BlogItemDetailsComponent implements OnInit {
   pleaseEdit: boolean = false;
   buttonName: string = 'Edit';
 
-  //Details of Edit form
+  //Details of Edit Form
   editForm: FormGroup;
   dataToSend: Blog;
   updateToSend: {};
+
+  //Details of Comment Form
+  commentForm: FormGroup;
+  commenterEmail: string;
+  commentToSend;
+
+  //Authentication check
+  isAuthenticated = false;
+  private userSubscription : Subscription;
+
 
 
   constructor(private blogService: BlogService,
@@ -42,6 +53,19 @@ export class BlogItemDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
+
+      this.authService.user.pipe(take(1)).subscribe(user => {
+      this.isAuthenticated = !user ? false : true;
+      console.log('Data about the user:');
+      console.log(user);
+      console.log('He is authenticated: ' + this.isAuthenticated);
+      //this.router.navigate(['/blogs']);
+      if (this.isAuthenticated == true) {
+        this.allowComment = true;
+        this.commenterEmail = user.email;
+      }
+      
+    })
 
     //console.log('The id is: ' + this.id);
     let userId = '';
@@ -76,6 +100,10 @@ export class BlogItemDetailsComponent implements OnInit {
       // fetchedBlogs.slice();
     })
 
+    this.commentForm = new FormGroup({
+      'comment': new FormControl(null, [Validators.required, Validators.minLength(6)]), // 
+    });
+
 
     // this.selectedBlog = this.blogService.getBlog(this.id)
     // console.log('The selected blog is: ' + this.selectedBlog);
@@ -96,7 +124,7 @@ export class BlogItemDetailsComponent implements OnInit {
   onAddComment() {
     // let modifiedArray = JSON.parse(this.selectedBlog.comments);    
 
-    let comment = 'Just a Comment!';
+    let comment = '[' + (new Date()).toString().slice(0,24) +'] '+this.commenterEmail + ': ' + this.commentForm.value.comment ;
     console.log('You are about to add comment!');
     //modifiedArray.push(comment);
 
@@ -105,9 +133,33 @@ export class BlogItemDetailsComponent implements OnInit {
     } else {
       this.selectedBlog.comments = [comment];
     }
+
+    //this.commentForm.reset();
     // this.selectedBlog.comments=(JSON.stringify(modifiedArray))
     // console.log(this.selectedBlog.comments)
     // this.selectedBlog.comments=JSON.parse(this.selectedBlog.comments)
+
+    this.isLoading = true; 
+    
+       // this.dataToSend.comments = ['first comment', 'second comment'];
+    this.authService.user.pipe(take(1)).subscribe(user => {
+      console.log(user);
+      this.commentToSend = this.selectedBlog.comments;
+      console.log('You are going to send the array of comments:');
+      let modifiedString = `{"comments": ["${this.commentToSend.join('", "')}"]}`;
+      console.log(modifiedString);
+      this.http.patch(`https://my-exam-1e19a.firebaseio.com/blogs/${this.selectedBlog.id}.json?auth=` + user.token, modifiedString ).subscribe(responseData => {
+        console.log(`this is the response of the update:`)
+        console.log(responseData);
+        
+        
+        this.isLoading = false;        
+       
+        this.commentForm.reset();
+       
+      })
+      
+    })
   }
 
   onEditBlog() {
