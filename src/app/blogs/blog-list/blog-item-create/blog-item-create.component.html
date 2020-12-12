@@ -22,7 +22,7 @@
                     <textarea name="description" formControlName="description" rows="5" class="form-control"></textarea>
 
                     <span *ngIf="!createForm.get('description').valid && createForm.get('description').touched"
-                        class="help-block" style="color:red;">Description should be at least 50 characters long!</span>
+                        class="help-block" style="color:red;">Description should be at least 200 characters long!</span>
                 </div>
                 <button class="btn btn-primary" type="submit" [disabled]="createForm.status == 'INVALID'">Create!</button>
             </form>

@@ -13,3 +13,8 @@
     padding-right: 12px;
     padding-left: 34px;
 }
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+
+}

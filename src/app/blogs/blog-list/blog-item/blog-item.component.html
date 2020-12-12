@@ -1,12 +1,14 @@
 <a style="cursor: pointer;" routerLink="/blogs/{{blog.id}}" routerLinkActive="active" class="list-group-item clearfix">
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{ blog.name | uppercase }}</h4>
-    <p class="list-group-item-date">{{ blog.createdAt | date:"medium" }}</p>
-    <p class="list-group-item-text">{{ blog.description | slice: 0: 150 }} ... </p>
+    <p class="list-group-item-date" *ngIf='!blog.comments'>{{ blog.createdAt | date:"medium" }} | Comments: 0</p>
+    <p class="list-group-item-date" *ngIf='blog.comments && blog.comments.length>0'>{{ blog.createdAt | date:"medium" }} |                Comments: {{blog.comments.length}} </p>
     
-
+    
+    
+    <span class="pull-right">
+      <img [src]="blog.imagePath" alt="{{ blog.name }}" class="img-responsive" style="max-height: 150px; min-width: 200;">
+    </span><p class="list-group-item-text">{{ blog.description | slice: 0: 150 }} ... </p>
   </div>
-  <span class="pull-right">
-    <img [src]="blog.imagePath" alt="{{ blog.name }}" class="img-responsive" style="max-height: 150px; min-width: 200;">
-  </span>
+ 
 </a>

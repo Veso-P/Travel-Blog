@@ -4,8 +4,8 @@
             <ul class="nav navbar-nav">
                 <!-- I will be using '/...' paths in order to implement absolute paths -->
                 <li routerLinkActive="active" *ngIf="isAuthenticated" class="form-group has-feedback has-user">
-                    <span class="glyphicon glyphicon-user form-control-feedback "></span>
-                    <a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/profile">My Profile</a></li>
+                    <!-- <span class="glyphicon glyphicon-user form-control-feedback "></span> -->
+                    <a style="cursor: pointer;" class="dropdown-toggle" routerLink="/user/profile" style="text-align:ri">{{currentUser}}</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a style="cursor: pointer;"
                         class="dropdown-toggle" routerLink="/blogs">Blogs</a></li>
                 <li routerLinkActive="active"><a style="cursor: pointer;" class="dropdown-toggle"

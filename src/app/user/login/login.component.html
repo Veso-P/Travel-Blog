@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-1">
-            <div class="alert alert-danger" *ngIf="error">
+            <div class="alert alert-danger" *ngIf="error" style="float: left;">
                 {{error}}
             </div>
             <div class="alert alert-success" role="alert" *ngIf="isLogging">
@@ -25,7 +25,7 @@
                     <label for="password">Password</label>
                     <span class="glyphicon glyphicon-wrench form-control-feedback" ></span>
 
-                    <input type="text" id="password" formControlName="password" class="form-control" placeholder="password">
+                    <input type="password" id="password" formControlName="password" class="form-control" placeholder="password">
                     <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched"
                         class="help-block" style="color:red;" >Please enter a valid password!</span>
                 </div>

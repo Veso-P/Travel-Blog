@@ -223,7 +223,8 @@ export class BlogItemDetailsComponent implements OnInit {
         this.selectedBlog.description=this.editForm.value.description;
         this.selectedBlog.imagePath=this.editForm.value.imagePath;
         this.isLoading = false;
-        this.pleaseEdit = !this.pleaseEdit;
+        //this.pleaseEdit = !this.pleaseEdit;
+        this.onEditBlog();
        
        this.router.navigate(['/blogs/'+this.selectedBlog.id])
        

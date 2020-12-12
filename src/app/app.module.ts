@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-fo
 import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { SortDatePipe } from './blogs/blog-list/sort-date.pipe';
+import { TrendingPipe } from './blogs/blog-list/trending.pipe';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { SortDatePipe } from './blogs/blog-list/sort-date.pipe';
     BlogItemComponent,
     FilterPipe,
     SortDatePipe,
+    TrendingPipe,
     UserComponent,
     LoginComponent,
     RegisterComponent,

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs';
+import { exhaustMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/user/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/user/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggingout = false;
   isAuthenticated = false;
+  currentUser: string;
   private userSubscription : Subscription;
 
   constructor(private router: Router, 
@@ -18,7 +20,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userSubscription = this.authService.user.subscribe(user => {
-      this.isAuthenticated = !user ? false : true;
+      if (!user) {
+        this.isAuthenticated = false;    
+      } else {
+        this.isAuthenticated = true;
+        this.currentUser = user.email;
+      }
+
+
+      // this.isAuthenticated = !user ? false : true; // Old authentication
       console.log('Data about the user:');
       console.log(user);
       //this.router.navigate(['/blogs']);

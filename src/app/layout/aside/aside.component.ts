@@ -13,6 +13,7 @@ export class AsideComponent implements OnInit, OnChanges, OnDestroy {
   isAuthenticated: boolean = false;
   private userSubscription: Subscription;
   num;
+  numTrending;
 
   constructor(private router: Router,
     private route: ActivatedRoute, private authService: AuthService) { }

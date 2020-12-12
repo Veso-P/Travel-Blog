@@ -57,7 +57,7 @@
                                     class="form-control"> {{ selectedBlog.description }} </textarea>
 
                                 <span *ngIf="!editForm.get('description').valid && editForm.get('description').touched"
-                                    class="help-block" style="color:red;">Description should be at least 50 characters
+                                    class="help-block" style="color:red;">Description should be at least 200 characters
                                     long!</span>
                             </div>
                             <button class="btn btn-primary" type="submit"
@@ -81,9 +81,9 @@
                 </div>
             </form>
 
-            <div *ngIf="!selectedBlog.hasOwnProperty('comments') || selectedBlog.comments.length == 0 "> No comments
+            <div *ngIf="!selectedBlog.hasOwnProperty('comments') || selectedBlog.comments.length == 0 " style="color: red"> No comments
                 yet! Be the first to write!</div>
-            <div *ngIf="selectedBlog.hasOwnProperty('comments') && selectedBlog.comments.length>0">
+            <div *ngIf="selectedBlog.hasOwnProperty('comments') && selectedBlog.comments.length>0" style="color: blue">
                 <h4>Travellers' comments!</h4>
                 <p *ngFor="let comment of selectedBlog.comments">{{comment}}</p>
             </div>

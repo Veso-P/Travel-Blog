@@ -1,7 +1,9 @@
 <aside style="width: 15%; display:inline-block; padding: 20px;">
     <nav class="navbar navbar-default" >        
-        <p routerLinkActive="myactiveclass"><a routerLink="/blogs/trending" style="text-align: left; padding: 10px;">Trending Blogs</a></p>
-        <p routerLinkActive="myactiveclass" ><a routerLink="/blogs/new/{{num}}" style="padding: 10px;">New Blogs: </a> <input [(ngModel)]="num" type="number" min="0" style="width: 45px;" ></p>
+        
+        <p routerLinkActive="myactiveclass"><input [(ngModel)]="numTrending" type="number" min="0" style="width: 45px;" ><a routerLink="/blogs/trending/{{numTrending}}" style="text-align: left; padding: 10px;">Trending Blogs</a></p>
+
+        <p routerLinkActive="myactiveclass" ><input [(ngModel)]="num" type="number" min="0" style="width: 45px;"> <a routerLink="/blogs/new/{{num}}" style="padding: 10px;">New Blogs</a> </p>
         
        <p *ngIf="isAuthenticated"><button  class="btn btn-info" (click)="onNewBlog()" style="text-align: center; padding: 10px;">Create New Blog</button></p>
       

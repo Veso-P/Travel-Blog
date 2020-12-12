@@ -59,7 +59,7 @@ export class BlogItemCreateComponent implements OnInit {
       this.http.post<{ name: string }>('https://my-exam-1e19a.firebaseio.com/blogs.json?auth=' + user.token, this.dataToSend).subscribe(responseData => {
         console.log(responseData);
         this.isLoading = false;
-        this.router.navigate(['/blogs'])
+        this.router.navigate(['/user/profile'])
       })
     })
 
