@@ -5,10 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import * as bcrypt from 'bcryptjs';
 
-
-
 import { User } from './user.model';
-
 
 interface AuthResponseData {
     kind: string;
@@ -36,14 +33,18 @@ export class AuthService {
 
     logout() {
         console.log('You are going to logout!');
+
         localStorage.removeItem('userInfo');
-            localStorage.removeItem('EI');
-       
-            this.router.navigate['/blogs'];
+        localStorage.removeItem('EI');
+
+        this.user.next(null);
+        this.router.navigate(['/user/login']);
+
+
+      
         setTimeout(() => {
-            this.user.next(null);
             // After logout redirection to main page.
-           
+
         }, 500);
 
         if (this.tokenExpirationTimer) {
@@ -95,7 +96,7 @@ export class AuthService {
         //console.log('ToBeDcrypted!')
         //console.log(user.token)
         const hashedInfo = bcrypt.hashSync(user.token, salt);
-       // console.log('The hashed info is: ' + hashedInfo);
+        // console.log('The hashed info is: ' + hashedInfo);
         localStorage.setItem('EI', JSON.stringify(hashedInfo));
 
 

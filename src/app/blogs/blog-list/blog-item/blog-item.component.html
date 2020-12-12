@@ -8,7 +8,8 @@
     
     <span class="pull-right">
       <img [src]="blog.imagePath" alt="{{ blog.name }}" class="img-responsive" style="max-height: 150px; min-width: 200;">
-    </span><p class="list-group-item-text">{{ blog.description | slice: 0: 150 }} ... </p>
+    </span>
+    <div style="text-align: left;">{{ blog.description | slice: 0: 150 }} ... </div>
   </div>
  
 </a>

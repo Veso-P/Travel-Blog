@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea name="description" formControlName="description" rows="5" class="form-control"></textarea>
+                    <textarea name="description" formControlName="description" rows="5" col="60" class="form-control"></textarea>
 
                     <span *ngIf="!createForm.get('description').valid && createForm.get('description').touched"
                         class="help-block" style="color:red;">Description should be at least 200 characters long!</span>

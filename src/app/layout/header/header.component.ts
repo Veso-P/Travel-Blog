@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
 
       if (!user) {
         this.isAuthenticated = false;
+
       } else {
 
 
@@ -83,6 +84,7 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
   onLogout() {
     this.isLoggingout = true;
     setTimeout(() => {
+      
       this.isLoggingout = false;
       this.authService.logout();
     }, 2500)

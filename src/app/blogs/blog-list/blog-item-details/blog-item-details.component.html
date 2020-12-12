@@ -31,26 +31,26 @@
             
 
             <!-- HERE IS THE BEGINNIGN OF EDIT FORM -->
-            <div class="container" *ngIf="pleaseEdit">
+            <div class="container" *ngIf="pleaseEdit" style="width:100%">
                 <hr>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-                        <h2>Edit your blog:</h2>
-                        <form [formGroup]="editForm" (ngSubmit)="sendEdit()">
-                            <div class="form-group">
-                                <label for="name">Title:</label>
-                                <input type="text" id="name" formControlName="name" class="form-control">
-                                <span *ngIf="!editForm.get('name').valid && editForm.get('name').touched"
+                    <!-- <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> -->
+                    <h2>Edit your blog:</h2>
+                <form [formGroup]="editForm" (ngSubmit)="sendEdit()">
+                    <div class="form-group">
+                            <label for="name">Title:</label>
+                             <input type="text" id="name" formControlName="name" class="form-control">
+                             <span *ngIf="!editForm.get('name').valid && editForm.get('name').touched"
                                     class="help-block" style="color:red;">Title should be at least 6 characters
                                     long!</span>
-                            </div>
-                            <div class="form-group">
+                </div>
+                <div class="form-group">
                                 <label for="imagePath">Image Path:</label>
                                 <input type="text" id="imagePath" formControlName="imagePath" class="form-control"
                                     [value]="selectedBlog.imagePath">
                                 <span *ngIf="!editForm.get('imagePath').valid && editForm.get('imagePath').touched"
                                     class="help-block" style="color:red;">Please enter a valid image path!</span>
-                            </div>
+                 </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
                                 <textarea name="description" formControlName="description" rows="5"
@@ -62,8 +62,8 @@
                             </div>
                             <button class="btn btn-primary" type="submit"
                                 [disabled]="editForm.status == 'INVALID'">Edit!</button>
-                        </form>
-                    </div>
+                 </form>
+                    <!-- </div> -->
                 </div>
             </div>
             <!-- THIS IS THE END OF EDIT FORM -->

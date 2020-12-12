@@ -36,7 +36,9 @@ In this application FireBase is used as a back-end. To solve the CORS issues a p
 
 Usage of FireBase as back-end.
 A. To register (signup) the user should enter a valid email (at least 6 characters long) and a passwored (at least 6 characters long). This is a FireBase built-in requirement.
-B. POST requests are used for user registration (signup), user login, creating a new blog. PATCH requests are used for partial update of data (i.e. for editing a blog, or addig a comment to a blog). GET requests are used for retrieving the data about the blogs.
+B. POST requests are used for user registration (signup), user login, creating a new blog. 
+C. PATCH requests are used for partial update of data (i.e. for editing a blog, or addig a comment to a blog). 
+D. GET requests are used for retrieving the data about the blogs.
 
 Usage of PIPES:
 A. Built-in pipes
@@ -44,10 +46,10 @@ A. Built-in pipes
 2) uppercase  - in the BlogItemComponent to print the titles of each blog in UPPER CASE.
 3) slie: 0 : 150  - in the BlogItemComponent to print only the first 150 characters of the blog description on the main page.
 
-B. Custom pipes
-1) sortDate custom pipe implemented for the page "New Blogs'. The pipe filters the newest 3 blogs by date.
+B. Custom pipes.
+1) sortDate custom pipe implemented for the page "New Blogs'. The pipe filters the newest blogs by date. The user choose the number of how many blogs to filter.
 2) filter custom pipe implemented for the Search field on the main page. It filters (case insensitive) the blogs by searching for matching a text in the titles (names) of the blogs
-3)
+3) trending custom pipe implemented for the page "Treding blog'. The pipe filters the trending blogs. The user choose the number of how many blogs to filter.
 
 Usage of FORMS:
 Mainly a reactive approach is used istead of template driven.
@@ -66,15 +68,24 @@ C. A form for creating a new blog with three fields is used:
     2. description - validator for min length of 200 characters is used
 
 D. A form for editng a blog with three fields is used:
-    1. blog title (name) - validator for min length of 6 characters is used
-    2. image source (imagePath) - validator for min length of 6 characters is used
-    2. description - validator for min length of 200 characters is used
+    1. blog title (name) - validator for min length of 6 characters is used.
+    2. image source (imagePath) - validator for min length of 6 characters is used.
+    2. description - validator for min length of 200 characters is used.
 
 E. A form for writing a comment with one field is used.
 
 
+Usage of Guards (CanActivate):
+1) AuthGuard is used to protect the links (create/edit page, user profile pages) from unauthenticated user.
+2) AuthGaurdTwo is used to protect the links (login, register) from authenticated user.
+
+Auth Service:
+is used to keep the operations needed for registering, logging-in, logging-out, and checking the current authentication status.
+
 Usage of Models:
 A. User Model consisting of email, password, token, and token expiration.
 B. Blog Model consisting of id, name, descriptoin, image source, date of cration, creator ID and array of comments. 
+
+Using of bcrypt for additional hasihg of the tokens.
 
 (TO BE EDITED)

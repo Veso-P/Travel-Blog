@@ -17,16 +17,14 @@
                 </div>
                 <div class="form-group has-feedback has-envelope" style="width: 75%;">
                     <label for="password">Password</label>
-                    <label for="password">Password</label>
                     <span class="glyphicon glyphicon-wrench form-control-feedback" ></span>
-                    <input type="text" id="password" formControlName="password" class="form-control">
+                    <input type="password" id="password" formControlName="password" class="form-control">
                     <span *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched" class="help-block" style="color:red;">Please enter a valid password at least 6 characters long!</span>
                 </div>
                 <div class="form-group has-feedback has-envelope" style="width: 75%;">
                     <label for="rePassword">Repeated Password</label>
-                    <label for="password">Password</label>
                     <span class="glyphicon glyphicon-wrench form-control-feedback" ></span>
-                    <input type="text" id="rePassword" formControlName="rePassword" class="form-control">
+                    <input type="password" id="rePassword" formControlName="rePassword" class="form-control">
                     <span *ngIf="!registerForm.get('rePassword').valid && registerForm.get('rePassword').touched" class="help-block" style="color:red;">Passwords should match!</span>
                 </div>
 
