@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, DoCheck, AfterContentChecked, AfterViewChecked, } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/user/auth.service';
-
 
 
 @Component({
@@ -10,12 +9,19 @@ import { AuthService } from 'src/app/user/auth.service';
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.css']
 })
-export class AsideComponent implements OnInit {
+export class AsideComponent implements OnInit, OnChanges, OnDestroy {
   isAuthenticated: boolean = false;
-  private userSubscription : Subscription;
+  private userSubscription: Subscription;
+  num;
 
   constructor(private router: Router,
     private route: ActivatedRoute, private authService: AuthService) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('We have changes!')
+    console.log(changes);
+  }
+
 
   ngOnInit(): void {
     this.userSubscription = this.authService.user.subscribe(user => {
@@ -29,7 +35,32 @@ export class AsideComponent implements OnInit {
     this.router.navigate(['/create']);
   }
 
+
+  // ngDoCheck() {
+  //   console.log('NG DoCheck!');
+  //   console.log(this.num)
+  //   this.onNewBlogs();
+  // }
+
+  // ngAfterContentChecked() {
+  //   this.router.navigate['/about']
+
+  //   console.log('NG AfterContentChecked!');
+  //   // console.log(this.num)
+  // }
+
+  // ngAfterViewChecked() {
+  //   console.log('NG afterVIEWchecked!');
+  //   // console.log(this.num)
+  //   this.router.navigate['/about'];
+  //   this.onNewBlogs();
+  // }
+
+  onNewBlogs() {
+    this.router.navigate['/about']
+  }
+
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
-  } 
+  }
 }

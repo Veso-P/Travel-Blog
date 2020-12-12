@@ -21,30 +21,34 @@ import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog
 
 
 const appRoutes: Routes = [
-  { path: 'blogs', component: BlogsComponent, pathMatch: 'full', },
+  {
+    path: 'blogs', children: [
+      { path: '', component: BlogsComponent, pathMatch: 'full' },
+      { path: 'new', component: BlogsComponent, pathMatch: 'full', data: { trending: true } }
+    ]
+  },
   { path: '', redirectTo: '/blogs', pathMatch: 'full' },
   { path: 'home', redirectTo: '/blogs', pathMatch: 'full' },
-  
+
 
   // General Pages
   { path: 'about', component: AboutComponent, pathMatch: 'full' },
   { path: 'contact', component: ContactComponent, pathMatch: 'full' },
   // Users Routes
-  { path: 'user/login', component: LoginComponent,canActivate:[AuthGuardTwo], pathMatch: 'full' },
-  { path: 'user/register', component: RegisterComponent, canActivate:[AuthGuardTwo], pathMatch: 'full' },
-  { path: 'user/profile', component: UserComponent, canActivate:[AuthGuard], pathMatch: 'full' },
+  { path: 'user/login', component: LoginComponent, canActivate: [AuthGuardTwo], pathMatch: 'full' },
+  { path: 'user/register', component: RegisterComponent, canActivate: [AuthGuardTwo], pathMatch: 'full' },
+  { path: 'user/profile', component: UserComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   // { path: 'user/profile/:id', component: RegisterComponent, pathMatch: 'full' },
 
   // Blog Pages 
   { path: 'blogs/trending', redirectTo: '/blogs', pathMatch: 'full' },
-  { path: 'create', component: BlogItemCreateComponent, canActivate:[AuthGuard], pathMatch: 'full' },
-  { path: 'blogs/new', redirectTo: '/blogs', pathMatch: 'full' },
+  { path: 'create', component: BlogItemCreateComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  // { path: 'blogs/new', redirectTo: '/blogs', pathMatch: 'full' },
   { path: 'blogs/:id', component: BlogItemDetailsComponent, pathMatch: 'full' },
-  
+  { path: 'blogs/new/:num', component: BlogsComponent, pathMatch: 'full', data: { trending: true } },
 
   // Page Not Found
-  {path: '**', component: PageNotFoundComponent}
-
+  { path: '**', component: PageNotFoundComponent }
 
 
 ];

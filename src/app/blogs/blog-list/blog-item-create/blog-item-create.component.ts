@@ -34,7 +34,7 @@ export class BlogItemCreateComponent implements OnInit {
     this.createForm = new FormGroup({
       'name': new FormControl(null, [Validators.required, Validators.minLength(6)]), //  
       'imagePath': new FormControl(null, Validators.required),
-      'description': new FormControl(null, [Validators.required, Validators.minLength(50)])
+      'description': new FormControl(null, [Validators.required, Validators.minLength(200)])
 
 
     });
