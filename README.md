@@ -1,13 +1,29 @@
 # TravelBlog
-A single page application for reading, commenting, and creating travel blogs. This project (A travel blog) will be created with Angular and FireBase as a back-end.
+A single page application for reading, commenting, and creating travel blogs. This project (A travel blog) will be created with Angular and FireBase as a back-end. For better styling Bootstrap is used.
 
 ## Main Idea
 The application will have two parts:
 
-1) Public part (accessible without authentication). Not authenticated users will be able to visit the main page (where some travel blogs will be displayed), the'trending page' (the first 5 blogs with highest number of likes) and the 'new blogs' page (the newest 5 blogs according to date of creation), and a search functionality - in order to search through the titles of the blog. Not authenticated users will be able to signup and login.
+A. Public part (accessible without authentication). Not authenticated users will be able to:
+1) visit the main page (where some travel blogs will be displayed), 
+2) visit the'trending page' (the first 5 blogs with highest number of comments),
+3) visit the 'new blogs' page (the newest blogs according to date of creation) with function to choose the number of blogs,
+4) use a search functionality - in order to search through the titles of the blog,
+5) visit(read-only) each blog details page.
+5) visit Login and Register pages,
+6) and visit 'About us' and 'Contacts' pages.
 
-2) Private part (available for registered users). The loggedin users will be able access to main page, the 'trending page', the 'new blogs' page, and a logout page. In addition they will be able to create new blogs, update (edit) their own blogs, and like and comment on others' blogs.
-*at a later starge, I will implement a profile page, where loggedin users will be able to see all their blogs.
+B. Private part (available for registered users). The loggedin users will be able to:
+1) visit the main page (where some travel blogs will be displayed), 
+2) visit the'trending page' (the first 5 blogs with highest number of comments),
+3) visit the 'new blogs' page (the newest blogs according to date of creation) with function to choose the number of blogs,
+4) use a search functionality - in order to search through the titles of the blog,
+5) visit each blog details page and COMMENT (in comparison non-authenticated users are not-allowed to comment on blogs).
+6) CREATE A NEW BLOG (in comparison non-authenticated users are not-allowed to create blogs).
+7) VISIT A 'MY PROFILE" PAGE which includes only the list of the posts created by the currently logged-in user (in comparison non-authenticated users are not-allowed to visit 'My Profile' page). 
+8) Logout.
+9) Login and Rigister is hidden and foribdden for loggid-in user.
+* Logged-in Users will be able to edit/update only their posts. On others' post they will be able only to comment.
 
 
 ### VERY IMPORTANT!
@@ -17,6 +33,10 @@ In this application FireBase is used as a back-end. To solve the CORS issues a p
 ----
 
 ### Functionalities implemented in the application
+
+Usage of FireBase as back-end.
+A. To register (signup) the user should enter a valid email (at least 6 characters long) and a passwored (at least 6 characters long). This is a FireBase built-in requirement.
+B. POST requests are used for user registration (signup), user login, creating a new blog. PATCH requests are used for partial update of data (i.e. for editing a blog, or addig a comment to a blog). GET requests are used for retrieving the data about the blogs.
 
 Usage of PIPES:
 A. Built-in pipes
@@ -30,6 +50,31 @@ B. Custom pipes
 3)
 
 Usage of FORMS:
-A reactive approach is used.
+Mainly a reactive approach is used istead of template driven.
+A. A form for registration a new user is used with three fields:
+    1. email - email validator used, min length of 6 validator used,
+    2. password - min length of 6 validator used
+    3. repated password - custom validator for matching the password is used
+
+B. A form for loggingin is used with two fields:
+    1. email - validator for min length of 6 characters is used
+    2. password - validator for min length of 6 characters is used
+
+C. A form for creating a new blog with three fields is used:
+    1. blog title (name) - validator for min length of 6 characters is used
+    2. image source (imagePath) - validator for min length of 6 characters is used
+    2. description - validator for min length of 200 characters is used
+
+D. A form for editng a blog with three fields is used:
+    1. blog title (name) - validator for min length of 6 characters is used
+    2. image source (imagePath) - validator for min length of 6 characters is used
+    2. description - validator for min length of 200 characters is used
+
+E. A form for writing a comment with one field is used.
+
+
+Usage of Models:
+A. User Model consisting of email, password, token, and token expiration.
+B. Blog Model consisting of id, name, descriptoin, image source, date of cration, creator ID and array of comments. 
 
 (TO BE EDITED)

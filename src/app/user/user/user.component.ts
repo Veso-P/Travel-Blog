@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
   data: Blog[];
   info: string;
   isLoading:boolean =false;
+  userName: string;
 
   constructor(private blogService: BlogService) { }
 
@@ -23,6 +24,7 @@ export class UserComponent implements OnInit {
 
     console.log('The user is: ')
      let userId = JSON.parse(this.info).id;
+     this.userName = JSON.parse(this.info).email;
      console.log('The user is: ' + userId);
     this.blogService.getBlogs().subscribe(fetchedBlogs => {
 
