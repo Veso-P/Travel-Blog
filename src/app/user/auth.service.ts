@@ -3,6 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
+import * as bcrypt from 'bcryptjs';
+
 
 
 import { User } from './user.model';
@@ -33,13 +35,15 @@ export class AuthService {
     }
 
     logout() {
-        console.log('You are going to logout!')
-        this.router.navigate['/blogs'];
-
+        console.log('You are going to logout!');
+        localStorage.removeItem('userInfo');
+            localStorage.removeItem('EI');
+       
+            this.router.navigate['/blogs'];
         setTimeout(() => {
             this.user.next(null);
             // After logout redirection to main page.
-            localStorage.removeItem('userInfo');
+           
         }, 500);
 
         if (this.tokenExpirationTimer) {
@@ -83,7 +87,18 @@ export class AuthService {
         const user = new User(email, userId, token, expirationDate);
         this.user.next(user);
         this.autoLogout(expiresIn * 1000)
-        localStorage.setItem('userInfo', JSON.stringify(user)); //Using logacl storage for the user
+        localStorage.setItem('userInfo', JSON.stringify(user)); //Using local storage for the user
+        //console.log('The user info to be ecnrypted is:')
+        localStorage.getItem('userInfo');
+
+        const salt = bcrypt.genSaltSync(10);
+        //console.log('ToBeDcrypted!')
+        //console.log(user.token)
+        const hashedInfo = bcrypt.hashSync(user.token, salt);
+       // console.log('The hashed info is: ' + hashedInfo);
+        localStorage.setItem('EI', JSON.stringify(hashedInfo));
+
+
 
     }
 
