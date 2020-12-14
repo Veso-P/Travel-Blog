@@ -6,13 +6,25 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
 
-// Services and Pipes
-import { FilterPipe } from './blogs/blog-list/filter.pipe';
+// Services 
+
 import { BlogService } from './blogs/blog.service';
 import { AuthService } from './user/auth.service';
+
+// PIPEs
+import { FilterPipe } from './blogs/blog-list/filter.pipe';
+
+// Custom Pipes
+import { SortDatePipe } from './blogs/blog-list/sort-date.pipe';
+import { TrendingPipe } from './blogs/blog-list/trending.pipe';
+
+// Guards
 import { AuthGuard } from './user/auth-guard.service';
 import { AuthGuardTwo } from './user/auth-guard-two.service';
 
+// Interceptors:
+import { AuthInterceptorService } from './user/auth-interceptor.service';
+import { LoggingInterceptorService } from './user/logging-interceptor.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -31,9 +43,8 @@ import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/bl
 import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-found.component';
 import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { SortDatePipe } from './blogs/blog-list/sort-date.pipe';
-import { TrendingPipe } from './blogs/blog-list/trending.pipe';
-import { AuthInterceptorService } from './user/auth-interceptor.service';
+
+
 
 
 @NgModule({
@@ -67,6 +78,11 @@ import { AuthInterceptorService } from './user/auth-interceptor.service';
   providers: [BlogService, AuthService, AuthGuard, AuthGuardTwo, {
     provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptorService,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS, 
+    useClass: LoggingInterceptorService,
     multi: true
   }], // 
   bootstrap: [AppComponent]

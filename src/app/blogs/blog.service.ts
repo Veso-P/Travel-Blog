@@ -31,16 +31,6 @@ export class BlogService {
 
   }
 
-  // getBlog(index: string) {
-  //   // let selectedBlog = '';
-  //   // //return this.blogs.find(item => item.id == index);
-  //   // console.log(index);
-
-  //   let blogs = this.getBlogs();
-  //   console.log(blogs);
-
-  // }
-
 }
 
 
@@ -51,3 +41,13 @@ export class BlogService {
   //   new Blog ('3','Varna blog', 'Description of Varna blog', 'https://tse4.mm.bing.net/th?id=OIP.r_as_UDbpl9_vegvB2-tHAEyDL&pid=Api', []),
   //   new Blog ('4','Dimitrovgrad blog', 'Description of Dimitrovgrad blog', 'https://vizit-bulgaria.ru/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2017/12/Dimitrovgrad_bulgari-1024x441.jpg.webp')
   // ];
+
+  // getBlog(index: string) {
+  //   // let selectedBlog = '';
+  //   // //return this.blogs.find(item => item.id == index);
+  //   // console.log(index);
+
+  //   let blogs = this.getBlogs();
+  //   console.log(blogs);
+
+  // }
