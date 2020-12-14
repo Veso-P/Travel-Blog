@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Blog } from '../blog.model';
@@ -11,7 +11,7 @@ import {FilterPipe} from './filter.pipe'
   styleUrls: ['./blog-list.component.css'],
   providers:[FilterPipe]
 })
-export class BlogListComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
+export class BlogListComponent implements OnInit,  OnDestroy, DoCheck {
   filteredStatus = '';
   isLoading: boolean = false;
   sub;
@@ -30,7 +30,7 @@ export class BlogListComponent implements OnInit, OnChanges, OnDestroy, DoCheck 
   constructor(private blogService: BlogService,
               private router: Router,
               private route: ActivatedRoute) {
-              console.log('Consturctor called')
+              console.log('Consturctor called.')
   }
 
   ngOnInit() {
@@ -70,28 +70,13 @@ export class BlogListComponent implements OnInit, OnChanges, OnDestroy, DoCheck 
       // fetchedBlogs.slice();
     })
     
-  }
-
-  ngOnChanges() {
-    // this.sub2 = this.route.data.subscribe(v => {
-    //   console.log('This is the data snapshot:')
-    //   console.log(v) 
-    //   if (v.hasOwnProperty('trending')) {
-    //     this.trending = v.trending;
-    //     console.log('is trending!')
-    //   } else if (v.hasOwnProperty('newest')) {
-    //     this.newest = v.newest;
-    //     console.log('is newest!')
-    //   }
-    // });
-
-  }
+  }  
 
   ngDoCheck() {
     this.limit = Number(this.route.snapshot.params['num']);
-    console.log(this.limit);
+    // console.log(this.limit); //For Debugging
     this.limitTrending = Number(this.route.snapshot.params['numTrending']);
-    console.log(this.limitTrending);
+    // console.log(this.limitTrending); //For Debugging
   }
   
   ngOnDestroy() {

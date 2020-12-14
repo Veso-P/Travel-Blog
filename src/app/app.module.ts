@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +33,7 @@ import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { SortDatePipe } from './blogs/blog-list/sort-date.pipe';
 import { TrendingPipe } from './blogs/blog-list/trending.pipe';
+import { AuthInterceptorService } from './user/auth-interceptor.service';
 
 
 @NgModule({
@@ -60,10 +61,14 @@ import { TrendingPipe } from './blogs/blog-list/trending.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,    
-    FormsModule, 
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule],
-  providers: [BlogService, AuthService, AuthGuard, AuthGuardTwo], // 
+  providers: [BlogService, AuthService, AuthGuard, AuthGuardTwo, {
+    provide: HTTP_INTERCEPTORS, 
+    useClass: AuthInterceptorService,
+    multi: true
+  }], // 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

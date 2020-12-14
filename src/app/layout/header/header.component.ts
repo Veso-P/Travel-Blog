@@ -39,29 +39,13 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
         // console.log('The user token is: ' + user.token)
         // console.log('To compare with: ' + JSON.parse(localStorage.getItem('EI')));
 
-
-
-        //   async function checkUser(username, password) {
-        //     //... fetch user from a db etc.
-
-        //     const match = await bcrypt.compare(password, user.passwordHash);
-
-        //     if(match) {
-        //         //login
-        //     }
-
-        //     //...
-        // }
-
       }
 
 
       // this.isAuthenticated = !user ? false : true; // Old authentication
       console.log('Data about the user:');
       console.log(user);
-      //this.router.navigate(['/blogs']);
-
-     
+      //this.router.navigate(['/blogs']);     
 
     })
 
@@ -83,12 +67,10 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
 
   onLogout() {
     this.isLoggingout = true;
-    setTimeout(() => {
-      
+    setTimeout(() => {      
       this.isLoggingout = false;
       this.authService.logout();
-    }, 2500)
-
+    }, 2000)
   }
 
   ngOnChanges() {

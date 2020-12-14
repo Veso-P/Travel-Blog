@@ -56,7 +56,7 @@ export class AuthService {
 
     register(email: string, password: string) {
         return this.http.
-            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC-M8hsjvq7nFpsvZ3UXsVUqSl7JPisdcs`,
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?[ADDYOURKEY]`,
                 {
                     email: email,
                     password: password,
@@ -83,6 +83,7 @@ export class AuthService {
             );
     }
 
+    // TO BE used for a Response Interceptor
     private handleAuth(email: string, userId: string, token: string, expiresIn: number) {
         const expirationDate = new Date(new Date().getTime() + Number(expiresIn) * 1000);
         const user = new User(email, userId, token, expirationDate);
@@ -99,14 +100,12 @@ export class AuthService {
         // console.log('The hashed info is: ' + hashedInfo);
         localStorage.setItem('EI', JSON.stringify(hashedInfo));
 
-
-
     }
 
     login(email: string, password: string) {
         console.log('You are going to login!')
         return this.http.
-            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC-M8hsjvq7nFpsvZ3UXsVUqSl7JPisdcs`,
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?[ADDYOURKEY]`,
                 {
                     email: email,
                     password: password,
@@ -153,7 +152,6 @@ export class AuthService {
             this.autoLogout(expirationDuration);
         }
 
-
     }
 
     autoLogout(expirationTime: number) {
@@ -161,17 +159,4 @@ export class AuthService {
             this.logout();
         }, expirationTime)
     }
-
 }
-
-
-// // isAuthenticated () {
-    //     const promise = new Promise ( 
-    //         (resolve, reject)=> {
-    //             setTimeout(() => {
-    //                 resolve(this.loggedIn)
-    //             }, 4000);
-    //         }
-    //     );
-    //     return promise;
-    // }

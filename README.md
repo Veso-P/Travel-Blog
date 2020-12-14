@@ -82,6 +82,9 @@ Usage of Guards (CanActivate):
 Auth Service:
 is used to keep the operations needed for registering, logging-in, logging-out, and checking the current authentication status.
 
+#### Usage of Interceptors
+1) Interceptor for adding the Authentication Token to HTTP POST requests
+
 Usage of Models:
 A. User Model consisting of email, password, token, and token expiration.
 B. Blog Model consisting of id, name, descriptoin, image source, date of cration, creator ID and array of comments. 

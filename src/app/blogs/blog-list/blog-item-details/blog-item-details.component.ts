@@ -52,6 +52,7 @@ export class BlogItemDetailsComponent implements OnInit {
   // constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.isLoading=true;
     this.id = this.route.snapshot.params['id']
 
       this.authService.user.pipe(take(1)).subscribe(user => {
@@ -80,6 +81,7 @@ export class BlogItemDetailsComponent implements OnInit {
       this.selectedBlog = fetchedBlogs.find(item => item.id == this.id);
       // console.log(typeof fetchedBlogs);
       console.log(this.selectedBlog)
+      this.isLoading=false
       if (this.selectedBlog.creator == userId){
         this.allowEdit = true;
       }
@@ -87,9 +89,7 @@ export class BlogItemDetailsComponent implements OnInit {
       this.editForm = new FormGroup({
         'name': new FormControl(this.selectedBlog.name, [Validators.required, Validators.minLength(6)]), //  
         'imagePath': new FormControl(this.selectedBlog.imagePath, Validators.required),
-        'description': new FormControl(this.selectedBlog.description, [Validators.required, Validators.minLength(50)])
-
-  
+        'description': new FormControl(this.selectedBlog.description, [Validators.required, Validators.minLength(50)]) 
   
       });
 
@@ -148,7 +148,7 @@ export class BlogItemDetailsComponent implements OnInit {
       console.log('You are going to send the array of comments:');
       let modifiedString = `{"comments": ["${this.commentToSend.join('", "')}"]}`;
       console.log(modifiedString);
-      this.http.patch(`https://my-exam-1e19a.firebaseio.com/blogs/${this.selectedBlog.id}.json?auth=` + user.token, modifiedString ).subscribe(responseData => {
+      this.http.patch(`https://my-exam-1e19a.firebaseio.com/blogs/${this.selectedBlog.id}.json?`, modifiedString ).subscribe(responseData => {
         console.log(`this is the response of the update:`)
         console.log(responseData);
         
@@ -183,7 +183,7 @@ export class BlogItemDetailsComponent implements OnInit {
     this.authService.user.pipe(take(1)).subscribe(user => {
       console.log(user);
 
-      this.http.delete(`/blogs/blogs/${this.id}.json?auth=` + user.token).subscribe(responseData => {
+      this.http.delete(`/blogs/blogs/${this.id}.json?`).subscribe(responseData => {
         console.log(responseData);
         
         this.isDeleted = true;
@@ -215,7 +215,7 @@ export class BlogItemDetailsComponent implements OnInit {
        // this.dataToSend.comments = ['first comment', 'second comment'];
     this.authService.user.pipe(take(1)).subscribe(user => {
       console.log(user);
-      this.http.patch<{}>(`https://my-exam-1e19a.firebaseio.com/blogs/${this.selectedBlog.id}.json?auth=` + user.token, this.updateToSend).subscribe(responseData => {
+      this.http.patch<{}>(`https://my-exam-1e19a.firebaseio.com/blogs/${this.selectedBlog.id}.json?`, this.updateToSend).subscribe(responseData => {
         console.log(`this is the response of the update:`)
         console.log(responseData);
         

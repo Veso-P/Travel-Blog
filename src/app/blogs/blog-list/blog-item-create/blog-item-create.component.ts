@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { take } from 'rxjs/operators'
 
 import { Blog } from '../../blog.model';
@@ -26,17 +26,13 @@ export class BlogItemCreateComponent implements OnInit {
 
   ngOnInit(): void {
 
-     // receivig user info:
-     this.info = localStorage.getItem('userInfo');
-     
-     
+    // receivig user info:
+    this.info = localStorage.getItem('userInfo');
 
     this.createForm = new FormGroup({
       'name': new FormControl(null, [Validators.required, Validators.minLength(6)]), //  
       'imagePath': new FormControl(null, [Validators.required, Validators.minLength(6)]),
       'description': new FormControl(null, [Validators.required, Validators.minLength(200)])
-
-
     });
     this.createForm.valueChanges.subscribe(
       (value) => { this.dataToSend = value }
@@ -46,8 +42,8 @@ export class BlogItemCreateComponent implements OnInit {
 
   onCreate() {
     this.isLoading = true;
-    this.dataToSend['creator'] = JSON.parse(this.info).id;    
-    
+    this.dataToSend['creator'] = JSON.parse(this.info).id;
+
     this.createdAt = Date.now();
 
     this.dataToSend.createdAt = this.createdAt;
@@ -56,16 +52,14 @@ export class BlogItemCreateComponent implements OnInit {
     // this.dataToSend.comments = ['first comment', 'second comment'];
     this.authService.user.pipe(take(1)).subscribe(user => {
       console.log(user);
-      this.http.post<{ name: string }>('https://my-exam-1e19a.firebaseio.com/blogs.json?auth=' + user.token, this.dataToSend).subscribe(responseData => {
-        console.log(responseData);
-        this.isLoading = false;
-        this.router.navigate(['/user/profile'])
-      })
+      this.http.post<{ name: string }>('https://my-exam-1e19a.firebaseio.com/blogs.json?', this.dataToSend).subscribe(responseData => {  // auth=' + user.token
+          console.log(responseData);
+          this.isLoading = false;
+          this.router.navigate(['/user/profile'])
+        })
     })
 
     // send HTTP request (subscription is obligatory as it is Observable)
-
-
     this.createForm.reset()
     // to be removed in the HTTP request
   }
