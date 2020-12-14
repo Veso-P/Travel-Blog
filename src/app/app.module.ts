@@ -43,6 +43,7 @@ import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/bl
 import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-found.component';
 import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 
 
@@ -67,7 +68,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     BlogItemDetailsComponent,
     PageNotFoundComponent,
     BlogItemCreateComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,15 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <div class="alert alert-danger" *ngIf="error">
+            <!-- OLD ERROR approach -->
+            <!-- <div class="alert alert-danger" *ngIf="error">
                 {{error}}
-            </div>
+            </div> -->
+            <!-- end of OLD ERROR approach -->
+            <!-- NEW ERROR approach -->
+            <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+            <!-- end of NEW ERROR approach -->
+
             <div *ngIf="isLoading" style="text-align: center;">
                 <app-spinner></app-spinner>
             </div>

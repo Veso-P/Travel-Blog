@@ -82,6 +82,8 @@ export class RegisterComponent implements OnInit {
   }
 
 
-
+  onHandleError() {
+    this.error = null;
+  }
 
 }
