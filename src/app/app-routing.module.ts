@@ -7,18 +7,18 @@ import { AuthGuardTwo } from './user/auth-guard-two.service'; // Guard for Authe
 
 // Components
 import { BlogsComponent } from './blogs/blogs.component';
-import { AboutComponent } from './common-pages/about/about.component';
-import { ContactComponent } from './common-pages/contact/contact.component';
-import { PageNotFoundComponent } from './common-pages/page-not-found/page-not-found.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
-import { UserComponent } from './user/user/user.component';
 import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
 import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
+import { UserComponent } from './user/user/user.component';
+
+import { CommonPagesComponent } from './common-pages/common-pages.component';
+
 
 const appRoutes: Routes = [
-  // Blog pages:
+  // Blog Pages/Routes:
   {
     path: 'blogs', children: [
       { path: '', component: BlogsComponent, pathMatch: 'full' },
@@ -39,23 +39,23 @@ const appRoutes: Routes = [
   },
   { path: '', redirectTo: '/blogs', pathMatch: 'full' },
   { path: 'home', redirectTo: '/blogs', pathMatch: 'full' },
-
-  // General Pages:
-  { path: 'about', component: AboutComponent, pathMatch: 'full' },
-  { path: 'contact', component: ContactComponent, pathMatch: 'full' },
-
-  // User Routes:
+  
+  // User Pages/Routes:
   {path: 'user', children:[
     { path: 'login', component: LoginComponent, canActivate: [AuthGuardTwo], pathMatch: 'full' },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuardTwo], pathMatch: 'full' },
     { path: 'profile', component: UserComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   ]},  
 
-  // Create Page: 
+  // Create Page/Route: 
   { path: 'create', component: BlogItemCreateComponent, canActivate: [AuthGuard], pathMatch: 'full' },
 
-  // Page Not Found:
-  { path: '**', component: PageNotFoundComponent }
+  // General Pages/Route:
+  { path: 'about', component: CommonPagesComponent, pathMatch: 'full', data: {page: 'about'}},
+  { path: 'contact', component: CommonPagesComponent, pathMatch: 'full', data: {page: 'contact'} },
+  
+  // Page Not Found (404):
+  { path: '**', component: CommonPagesComponent, data: {page: 'page404'} }
 
 ];
 
