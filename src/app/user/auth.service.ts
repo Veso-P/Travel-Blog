@@ -72,7 +72,6 @@ export class AuthService {
                     switch (errorRes.error.error.message) {
                         case 'EMAIL_EXISTS': errorMessage = 'This email exists already! Please, use another one.'; break;
 
-
                     }
                     return throwError(errorMessage);
                 })),

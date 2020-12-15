@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { take } from 'rxjs/operators'
 
-import { Blog } from '../../blog.model';
+import { Blog } from '../blog.model';
 import { AuthService } from 'src/app/user/auth.service';
 
 

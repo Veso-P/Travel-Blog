@@ -6,8 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 
-import { Blog } from '../../blog.model'
-import { BlogService } from '../../blog.service';
+import { Blog } from '../blog.model'
+import { BlogService } from '../blog.service';
 import { AuthService } from 'src/app/user/auth.service';
 
 
@@ -40,8 +40,6 @@ export class BlogItemDetailsComponent implements OnInit {
   //Authentication check
   isAuthenticated = false;
   private userSubscription : Subscription;
-
-
 
   constructor(private blogService: BlogService,
     private route: ActivatedRoute,

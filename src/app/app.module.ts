@@ -7,15 +7,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 
 // Services
-import { BlogService } from './blogs/blog.service';
+import { BlogService } from './blogs/blog-list/blog.service';
 import { AuthService } from './user/auth.service';
 
 // PIPEs
-import { FilterPipe } from './blogs/blog-list/filter.pipe';
+import { FilterPipe } from './blogs/blog-list/blog-pipes/filter.pipe';
 
 // Custom Pipes
-import { SortDatePipe } from './blogs/blog-list/sort-date.pipe';
-import { TrendingPipe } from './blogs/blog-list/trending.pipe';
+import { SortDatePipe } from './blogs/blog-list/blog-pipes/sort-date.pipe';
+import { TrendingPipe } from './blogs/blog-list/blog-pipes/trending.pipe';
 
 // Guards
 import { AuthGuard } from './user/auth-guard.service';
@@ -30,19 +30,20 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AsideComponent } from './layout/aside/aside.component';
+
+import { CommonPagesComponent } from './common-pages/common-pages.component';
+
 import { BlogsComponent } from './blogs/blogs.component';
-import { BlogListComponent } from './blogs/blog-list/blog-list.component';
 import { BlogItemComponent } from './blogs/blog-list/blog-item/blog-item.component';
+import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
+import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
 
 import { UserComponent } from './user/user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
-import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
-import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
+
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AlertComponent } from './shared/alert/alert.component';
-import { CommonPagesComponent } from './common-pages/common-pages.component';
-
 
 
 @NgModule({
@@ -56,7 +57,6 @@ import { CommonPagesComponent } from './common-pages/common-pages.component';
     CommonPagesComponent,
 
     BlogsComponent,
-    BlogListComponent,
     BlogItemComponent,
     BlogItemDetailsComponent,
     BlogItemCreateComponent,
