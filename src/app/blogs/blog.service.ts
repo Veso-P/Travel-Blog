@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 
 import { Blog } from './blog.model';
-import { AuthService } from '../../user/auth.service';
+import { AuthService } from '../user/auth-services/auth.service';
 
 @Injectable()
 export class BlogService {

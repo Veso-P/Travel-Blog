@@ -2,7 +2,7 @@ import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs';
 import { exhaustMap } from 'rxjs/operators';
-import { AuthService } from 'src/app/user/auth.service';
+import { AuthService } from 'src/app/user/auth-services/auth.service';
 import * as bcrypt from 'bcryptjs';
 
 

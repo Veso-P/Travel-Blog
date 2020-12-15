@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, Input, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { BlogService } from './blog-list/blog.service';
-import {FilterPipe} from './blog-list/blog-pipes/filter.pipe'
-import {Blog} from './blog-list/blog.model'
+import { BlogService } from './blog.service';
+import {FilterPipe} from './blog-pipes/filter.pipe'
+import {Blog} from './blog.model'
 
 @Component({
   selector: 'app-blogs',

@@ -3,27 +3,24 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
+// Importing custom Modules
+import { BlogsModule } from './blogs/blogs.module';
+import { UserModule } from './user/user.module';
+
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
 
 // Services
-import { BlogService } from './blogs/blog-list/blog.service';
-import { AuthService } from './user/auth.service';
-
-// PIPEs
-import { FilterPipe } from './blogs/blog-list/blog-pipes/filter.pipe';
-
-// Custom Pipes
-import { SortDatePipe } from './blogs/blog-list/blog-pipes/sort-date.pipe';
-import { TrendingPipe } from './blogs/blog-list/blog-pipes/trending.pipe';
+import { BlogService } from './blogs/blog.service';
+import { AuthService } from './user/auth-services/auth.service';
 
 // Guards
-import { AuthGuard } from './user/auth-guard.service';
-import { AuthGuardTwo } from './user/auth-guard-two.service';
+import { AuthGuard } from './user/auth-guards/auth-guard.service';
+import { AuthGuardTwo } from './user/auth-guards/auth-guard-two.service';
 
 // Interceptors:
-import { AuthInterceptorService } from './user/auth-interceptor.service';
-import { LoggingInterceptorService } from './user/logging-interceptor.service';
+import { AuthInterceptorService } from './user/auth-services/auth-interceptor.service';
+import { LoggingInterceptorService } from './user/auth-services/logging-interceptor.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -33,16 +30,7 @@ import { AsideComponent } from './layout/aside/aside.component';
 
 import { CommonPagesComponent } from './common-pages/common-pages.component';
 
-import { BlogsComponent } from './blogs/blogs.component';
-import { BlogItemComponent } from './blogs/blog-list/blog-item/blog-item.component';
-import { BlogItemDetailsComponent } from './blogs/blog-list/blog-item-details/blog-item-details.component';
-import { BlogItemCreateComponent } from './blogs/blog-list/blog-item-create/blog-item-create.component';
-
-import { UserComponent } from './user/user/user.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
-
-import { SpinnerComponent } from './shared/spinner/spinner.component';
+//import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AlertComponent } from './shared/alert/alert.component';
 
 
@@ -55,30 +43,21 @@ import { AlertComponent } from './shared/alert/alert.component';
     AsideComponent,
 
     CommonPagesComponent,
-
-    BlogsComponent,
-    BlogItemComponent,
-    BlogItemDetailsComponent,
-    BlogItemCreateComponent,
-
-    FilterPipe,
-    SortDatePipe,
-    TrendingPipe,
-
-    UserComponent,
-    LoginComponent,
-    RegisterComponent,
-
+    
     AlertComponent,
-    SpinnerComponent,
+    //SpinnerComponent,
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule],
+    HttpClientModule,
+
+    BlogsModule,
+    UserModule,
+    AppRoutingModule, // AppRoutinModule is last, because of the '**' page.
+  ],
   providers: [BlogService, AuthService, AuthGuard, AuthGuardTwo,
     {
       provide: HTTP_INTERCEPTORS,
@@ -93,3 +72,33 @@ import { AlertComponent } from './shared/alert/alert.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
+
+
+
+
+
+// OLD CODE:
+
+// import { BlogsComponent } from './blogs/blogs.component';
+// import { BlogItemComponent } from './blogs/blog-item/blog-item.component';
+// import { BlogItemDetailsComponent } from './blogs/blog-item-details/blog-item-details.component';
+// import { BlogItemCreateComponent } from './blogs/blog-item-create/blog-item-create.component';
+
+// // PIPEs
+// import { FilterPipe } from './blogs/blog-pipes/filter.pipe';
+
+// // Custom Pipes
+// import { SortDatePipe } from './blogs/blog-pipes/sort-date.pipe';
+// import { TrendingPipe } from './blogs/blog-pipes/trending.pipe';
+
+// FilterPipe,
+    // SortDatePipe,
+    // TrendingPipe,
+
+//     import { UserComponent } from './user/user/user.component';
+// import { LoginComponent } from './user/login/login.component';
+// import { RegisterComponent } from './user/register/register.component';

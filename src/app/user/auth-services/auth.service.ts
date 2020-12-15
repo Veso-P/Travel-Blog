@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import * as bcrypt from 'bcryptjs';
 
-import { User } from './user.model';
+import { User } from '../user.model';
 
 interface AuthResponseData {
     kind: string;

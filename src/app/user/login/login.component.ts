@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth-services/auth.service';
 import { ControlContainer, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 

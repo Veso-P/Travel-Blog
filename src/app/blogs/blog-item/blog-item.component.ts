@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { Blog } from '../blog.model'
 
@@ -16,8 +15,7 @@ export class BlogItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.blog)
-    
+    // console.log(this.blog) // For DEBBUGING!    
   }
 
 }

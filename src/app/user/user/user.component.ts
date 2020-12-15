@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from 'src/app/blogs/blog-list/blog.service';
-import { Blog } from 'src/app/blogs/blog-list/blog.model';
+import { BlogService } from 'src/app/blogs/blog.service';
+import { Blog } from 'src/app/blogs/blog.model';
 
 
 
@@ -22,20 +22,20 @@ export class UserComponent implements OnInit {
     this.info = localStorage.getItem('userInfo'); 
     this.isLoading=true;
 
-    console.log('The user is: ')
+    // console.log('The user is: ') // For DEBBUGING
      let userId = JSON.parse(this.info).id;
      this.userName = (JSON.parse(this.info)).email;
-     console.log('The user is: ' + userId);
+    //  console.log('The user is: ' + userId); // For DEBBUGING
     this.blogService.getBlogs().subscribe(fetchedBlogs => {
 
      let sortedByCreator = fetchedBlogs.filter(a => a.creator == userId);
           this.data = sortedByCreator;
-          console.log('The data is: ' + this.data.length);
+          // console.log('The data is: ' + this.data.length); // For DEBBUGING
         this.isLoading=false;
-    //  this.data = fetchedBlogs;
-    //  console.log(sortedByCreator)
-    //  console.log(typeof fetchedBlogs);
-    //  fetchedBlogs.slice();
+    //  this.data = fetchedBlogs; // For DEBBUGING
+    //  console.log(sortedByCreator) // For DEBBUGING
+    //  console.log(typeof fetchedBlogs); // For DEBBUGING
+    //  fetchedBlogs.slice(); // For DEBBUGING
     })
   }
 

@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 
 import { Blog } from '../blog.model'
 import { BlogService } from '../blog.service';
-import { AuthService } from 'src/app/user/auth.service';
+import { AuthService } from 'src/app/user/auth-services/auth.service';
 
 
 @Component({

@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { take } from 'rxjs/operators'
 
 import { Blog } from '../blog.model';
-import { AuthService } from 'src/app/user/auth.service';
+import { AuthService } from 'src/app/user/auth-services/auth.service';
 
 
 @Component({
