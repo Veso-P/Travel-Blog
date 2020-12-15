@@ -1,16 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 // Components
 import { BlogsComponent } from './blogs.component';
 import { BlogItemComponent } from './blog-item/blog-item.component';
 import { BlogItemCreateComponent } from './blog-item-create/blog-item-create.component';
 import { BlogItemDetailsComponent } from './blog-item-details/blog-item-details.component';
-
-import { SpinnerComponent } from '../shared/spinner/spinner.component';
-
 
 // PIPEs
 import { FilterPipe } from './blog-pipes/filter.pipe';
@@ -20,7 +15,6 @@ import { TrendingPipe } from './blog-pipes/trending.pipe';
 
 // Routes
 import { BlogsRoutingModule } from './blogs-routing.module';
-
 
 
 @NgModule({
@@ -33,36 +27,12 @@ import { BlogsRoutingModule } from './blogs-routing.module';
         FilterPipe,
         SortDatePipe,
         TrendingPipe,
-
-        SpinnerComponent,
-
     ],
     imports: [
-        RouterModule,
-        CommonModule,
-        ReactiveFormsModule,
-        FormsModule,
-        
+        SharedModule,
         BlogsRoutingModule
     ],
 
 })
 
 export class BlogsModule { }
-
-
-
-
-
-
-
-
-
-
- // exports: [
-    //     BlogsComponent,
-    //     BlogItemComponent,
-    //     BlogItemCreateComponent,
-    //     BlogItemDetailsComponent,
-    //     BlogsRoutingModule
-    // ]

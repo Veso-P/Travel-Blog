@@ -14,7 +14,7 @@ export class AuthGuardTwo implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean| UrlTree> | boolean | UrlTree {
         return this.authService.user.pipe(take(1), map(user => {
-            console.log('The user in isAuth is:' + user);
+            // console.log('The user in isAuth is:' + user); // Use for DEBBUGING
             const isAuth = ! user;
             if (isAuth){
                 return true;

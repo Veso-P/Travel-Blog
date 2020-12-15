@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Guards
-import { AuthGuard } from '../user/auth-guards/auth-guard.service'; //Guard for non-Authenticated Users
+import { AuthGuard } from '../user/auth-guards/auth-guard.service'; // Guard for non-Authenticated Users
 import { AuthGuardTwo } from './auth-guards/auth-guard-two.service'; // Guard for Authenticated Users
 
 // Components

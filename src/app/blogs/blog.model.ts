@@ -5,7 +5,7 @@ export class Blog {
   public imagePath: string;  
   public createdAt: number;
   public creator: string;
-  public comments?: Array<string>; //for now I will leave the comments prop to be optional
+  public comments?: Array<string>; // for now I will leave the comments prop to be optional
   
 
   constructor(id: string, name: string, desc: string, imagePath: string, comments: Array<string>, createdAt: number, creator: string) {

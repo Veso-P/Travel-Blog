@@ -7,7 +7,7 @@ import * as bcrypt from 'bcryptjs';
 
 import { User } from '../user.model';
 
-interface AuthResponseData {
+interface AuthResponseData {  // Interface for the FireBase response
     kind: string;
     idToken: string;
     email: string;
@@ -32,7 +32,7 @@ export class AuthService {
     }
 
     logout() {
-        console.log('You are going to logout!');
+        // console.log('You are going to logout!'); // Use for DEBBUGING
 
         localStorage.removeItem('userInfo');
         localStorage.removeItem('EI');
@@ -40,12 +40,10 @@ export class AuthService {
         this.user.next(null);
         this.router.navigate(['/user/login']);
 
+        // setTimeout(() => {
+        //     // After logout redirection to main page.
 
-      
-        setTimeout(() => {
-            // After logout redirection to main page.
-
-        }, 500);
+        // }, 500);
 
         if (this.tokenExpirationTimer) {
             clearTimeout(this.tokenExpirationTimer);
@@ -89,14 +87,14 @@ export class AuthService {
         this.user.next(user);
         this.autoLogout(expiresIn * 1000)
         localStorage.setItem('userInfo', JSON.stringify(user)); //Using local storage for the user
-        //console.log('The user info to be ecnrypted is:')
+        //console.log('The user info to be ecnrypted is:') // Use for DEBUGGING
         localStorage.getItem('userInfo');
 
         const salt = bcrypt.genSaltSync(10);
-        //console.log('ToBeDcrypted!')
-        //console.log(user.token)
+        //console.log('ToBeDcrypted!') // Use for DEBUGGING
+        //console.log(user.token) // Use for DEBUGGING
         const hashedInfo = bcrypt.hashSync(user.token, salt);
-        // console.log('The hashed info is: ' + hashedInfo);
+        // console.log('The hashed info is: ' + hashedInfo); // Use for DEBUGGING
         localStorage.setItem('EI', JSON.stringify(hashedInfo));
 
     }

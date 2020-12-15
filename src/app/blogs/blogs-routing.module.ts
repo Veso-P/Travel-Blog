@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Guards
-import { AuthGuard } from '../user/auth-guards/auth-guard.service';//Guard for non-Authenticated Users
+import { AuthGuard } from '../user/auth-guards/auth-guard.service'; // Guard for non-Authenticated Users
 
 // Components
 import { BlogItemCreateComponent } from './blog-item-create/blog-item-create.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: ':id', component: BlogItemDetailsComponent, pathMatch: 'full' },
     ]
   },
-  // Create Page/Route: 
+  // => Create Page/Route: 
   { path: 'create', component: BlogItemCreateComponent, canActivate: [AuthGuard], pathMatch: 'full' },
 ];
 
