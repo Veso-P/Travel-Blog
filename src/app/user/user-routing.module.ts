@@ -14,7 +14,7 @@ import { UserComponent } from './user/user.component';
 // User Pages/Routes:
 const routes: Routes = [
     {
-        path: 'user', children: [
+        path: '', children: [
             { path: 'login', component: LoginComponent, canActivate: [AuthGuardTwo], pathMatch: 'full' },
             { path: 'register', component: RegisterComponent, canActivate: [AuthGuardTwo], pathMatch: 'full' },
             { path: 'profile', component: UserComponent, canActivate: [AuthGuard], pathMatch: 'full' },

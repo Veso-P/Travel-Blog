@@ -7,6 +7,7 @@ import { CoreModule } from './core.module';
 import { SharedModule } from './shared/shared.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { UserModule } from './user/user.module';
+import { LayoutModule } from './layout/layout.module';
 import { CommonPagesModule } from './layout/common-pages/common-pages.module';
 
 // Routing Module
@@ -15,19 +16,10 @@ import { AppRoutingModule } from './app-routing.module';
 // Components
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { AsideComponent } from './layout/aside/aside.component';
-
 
 @NgModule({
   declarations: [
-    AppComponent,
-
-    HeaderComponent,
-    FooterComponent,
-    AsideComponent,
-
+    AppComponent,       
   ],
   imports: [
     BrowserModule,   
@@ -38,6 +30,7 @@ import { AsideComponent } from './layout/aside/aside.component';
     SharedModule,
     BlogsModule,
     UserModule,
+    LayoutModule,
     CommonPagesModule, // CommonPagesModule is last, because of the '**' page    
   ],
   

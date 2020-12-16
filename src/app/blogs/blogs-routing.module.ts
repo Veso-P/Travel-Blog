@@ -13,7 +13,7 @@ import { BlogsComponent } from './blogs.component';
 // Blog Pages/Routes:
 const routes: Routes = [
   {
-    path: 'blogs', children: [
+    path: '', children: [
       { path: '', component: BlogsComponent, pathMatch: 'full' },
       {
         path: 'new', children: [

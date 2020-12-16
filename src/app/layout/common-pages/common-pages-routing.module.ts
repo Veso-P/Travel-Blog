@@ -7,10 +7,15 @@ import { CommonPagesComponent } from './common-pages.component';
 
 // General Pages/Routes:
 const routes: Routes = [   
-  { path: 'about', component: CommonPagesComponent, pathMatch: 'full', data: {page: 'about'}},
-  { path: 'contact', component: CommonPagesComponent, pathMatch: 'full', data: {page: 'contact'} },
-  // // Page Not Found (404):
-  { path: '**', component: CommonPagesComponent, data: {page: 'page404'} }    
+  {
+    path: '', children: [
+      { path: 'about', component: CommonPagesComponent, pathMatch: 'full', data: {page: 'about'}},
+      { path: 'contact', component: CommonPagesComponent, pathMatch: 'full', data: {page: 'contact'} },
+      // // Page Not Found (404):
+      { path: '**', component: CommonPagesComponent, data: {page: 'page404'} }    
+      ]
+  }
+  
 ];
 
 @NgModule({

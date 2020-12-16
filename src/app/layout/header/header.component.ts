@@ -23,29 +23,27 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.userSubscription = this.authService.user.subscribe(user => {
-      console.log('The user info on OnInit is:');
-      console.log(user);
+      //console.log('The user info on OnInit is:'); // For DEBUGGING 
+      //console.log(user); // For DEBUGGING 
 
       if (!user) {
         this.isAuthenticated = false;
 
       } else {
 
-
         this.isAuthenticated = true;
         this.currentUser = user.email;
         this.userToken = user.token;
 
-        // console.log('The user token is: ' + user.token)
-        // console.log('To compare with: ' + JSON.parse(localStorage.getItem('EI')));
-
+        // console.log('The user token is: ' + user.token) // For DEBUGGING
+        // console.log('To compare with: ' + JSON.parse(localStorage.getItem('EI'))); // For DEBUGGING 
       }
 
 
-      // this.isAuthenticated = !user ? false : true; // Old authentication
-      console.log('Data about the user:');
-      console.log(user);
-      //this.router.navigate(['/blogs']);     
+      // this.isAuthenticated = !user ? false : true; 
+      //console.log('Data about the user:'); // For DEBUGGING 
+      //console.log(user); // For DEBUGGING 
+      //this.router.navigate(['/blogs']);  // Old authentication
 
     })
 
@@ -54,11 +52,11 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges {
       this.isAuthenticated = false
     } else {
       if (bcrypt.compareSync(this.userToken, hash)) {
-        console.log('Is real token');
+        //console.log('Is real token'); // For DEBUGGING 
         this.isAuthenticated = true;
 
       } else {
-        console.log('Is not a real token!');
+        //console.log('Is not a real token!'); // For DEBUGGING 
         this.isAuthenticated = false;
         this.onLogout();
       }
