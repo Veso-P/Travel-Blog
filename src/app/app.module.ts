@@ -5,10 +5,9 @@ import { HttpClientModule } from '@angular/common/http'
 // Importing custom Modules
 import { CoreModule } from './core.module';
 import { SharedModule } from './shared/shared.module';
-import { BlogsModule } from './blogs/blogs.module';
-import { UserModule } from './user/user.module';
 import { LayoutModule } from './layout/layout.module';
-import { CommonPagesModule } from './layout/common-pages/common-pages.module';
+// other modules are lazy-loaded
+
 
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
@@ -27,11 +26,8 @@ import { AppComponent } from './app.component';
 
     AppRoutingModule,
     CoreModule,
-    SharedModule,
-    BlogsModule,
-    UserModule,
+    SharedModule,        
     LayoutModule,
-    CommonPagesModule, // CommonPagesModule is last, because of the '**' page    
   ],
   
   bootstrap: [AppComponent]

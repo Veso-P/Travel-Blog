@@ -47,13 +47,13 @@ export class BlogItemCreateComponent implements OnInit {
     this.createdAt = Date.now();
 
     this.dataToSend.createdAt = this.createdAt;
-    console.log('The data to be send is: ');
-    console.log(this.dataToSend);
-    // this.dataToSend.comments = ['first comment', 'second comment'];
+    // console.log('The data to be send is: '); // For DEBBUGING!    
+    // console.log(this.dataToSend); // For DEBBUGING!    
+    this.dataToSend.comments = ['first comment', 'second comment'];
     this.authService.user.pipe(take(1)).subscribe(user => {
-      console.log(user);
+      // console.log(user); // For DEBBUGING!  
       this.http.post<{ name: string }>('https://my-exam-1e19a.firebaseio.com/blogs.json?', this.dataToSend).subscribe(responseData => {  // auth=' + user.token
-          console.log(responseData);
+          // console.log(responseData); // For DEBBUGING!  
           this.isLoading = false;
           this.router.navigate(['/user/profile'])
         })
@@ -61,7 +61,7 @@ export class BlogItemCreateComponent implements OnInit {
 
     // send HTTP request (subscription is obligatory as it is Observable)
     this.createForm.reset()
-    // to be removed in the HTTP request
+    // to be removed in the HTTP request:
   }
 
 }
