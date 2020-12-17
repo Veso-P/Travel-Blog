@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row">
+    <div class="row" [@pageState]="state" >
         <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-1">
             <div class="alert alert-danger" *ngIf="isDeleted">
                 The blog was successfully deleted!
@@ -26,9 +26,7 @@
                 |
                 <button class="btn btn btn-danger" (click)="onDeleteBlog()">Delete</button>
             </div>
-
-
-            
+          
 
             <!-- HERE IS THE BEGINNIGN OF EDIT FORM -->
             <div class="container" *ngIf="pleaseEdit" style="width:100%">

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import * as bcrypt from 'bcryptjs';
+import {environment} from '../../../environments/environment';
 
 import { User } from '../user.model';
 
@@ -54,7 +55,7 @@ export class AuthService {
 
     register(email: string, password: string) {
         return this.http.
-            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?[ADDYOURKEY]`,
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=` + environment.fbAPIKey,
                 {
                     email: email,
                     password: password,
@@ -100,9 +101,9 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        console.log('You are going to login!')
+        // console.log('You are going to login!') // For DEBUGGING
         return this.http.
-            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?[ADDYOURKEY]`,
+            post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=` + environment.fbAPIKey,
                 {
                     email: email,
                     password: password,
@@ -137,7 +138,7 @@ export class AuthService {
         } = JSON.parse(localStorage.getItem('userInfo'));
 
         if (!userInfo) {
-            console.log('You are here in the AUTO LOGIN!');
+            // console.log('You are here in the AUTO LOGIN!'); // For DEBUGGING
             return;
         }
 

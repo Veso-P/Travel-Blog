@@ -1,6 +1,6 @@
 {
     "/blogs": {
-        "target": "https://my-exam-1e19a.firebaseio.com",
+        "target": "https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app",
         "secure": true,
         "pathRewrite": {
             "^/blogs": ""

@@ -27,11 +27,13 @@ const routes: Routes = [
           { path: ':numTrending', component: BlogsComponent, pathMatch: 'full', data: { trending: true } },
         ]
       },
+      { path: 'create', component: BlogItemCreateComponent, canActivate: [AuthGuard], pathMatch: 'full' },
       { path: ':id', component: BlogItemDetailsComponent, pathMatch: 'full' },
+      
     ]
   },
   // => Create Page/Route: 
-  { path: 'create', component: BlogItemCreateComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  
 ];
 
 @NgModule({

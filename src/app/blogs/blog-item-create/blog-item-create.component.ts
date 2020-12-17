@@ -49,10 +49,10 @@ export class BlogItemCreateComponent implements OnInit {
     this.dataToSend.createdAt = this.createdAt;
     // console.log('The data to be send is: '); // For DEBBUGING!    
     // console.log(this.dataToSend); // For DEBBUGING!    
-    this.dataToSend.comments = ['first comment', 'second comment'];
+    //this.dataToSend.comments = ['first comment', 'second comment'];
     this.authService.user.pipe(take(1)).subscribe(user => {
       // console.log(user); // For DEBBUGING!  
-      this.http.post<{ name: string }>('https://my-exam-1e19a.firebaseio.com/blogs.json?', this.dataToSend).subscribe(responseData => {  // auth=' + user.token
+      this.http.post<{ name: string }>('https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app/blogs.json?', this.dataToSend).subscribe(responseData => {  // auth=' + user.token
           // console.log(responseData); // For DEBBUGING!  
           this.isLoading = false;
           this.router.navigate(['/user/profile'])

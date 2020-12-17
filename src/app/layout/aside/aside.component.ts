@@ -19,8 +19,8 @@ export class AsideComponent implements OnInit, OnChanges, OnDestroy {
     private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('We have changes!')
-    console.log(changes);
+    //console.log('We have changes!') //For DEBUGGING
+    //console.log(changes); //For DEBUGGING
   }
 
 
@@ -33,7 +33,7 @@ export class AsideComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onNewBlog() {
-    this.router.navigate(['/create']);
+    this.router.navigate(['/blogs/create']);
   }
 
 

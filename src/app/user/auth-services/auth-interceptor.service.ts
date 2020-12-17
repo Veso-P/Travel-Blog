@@ -10,9 +10,9 @@ export class AuthInterceptorService implements HttpInterceptor {
     constructor(private authService: AuthService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        console.log('Request is on its way!');
-        console.log('The req is');
-        console.log(req);
+        //console.log('Request has been sent!'); // For DEBUGGING
+        //console.log('The req is: '); // For DEBUGGING
+        // console.log(req); // For DEBUGGING
         // this.isLoading = true;
 
         return this.authService.user.pipe(

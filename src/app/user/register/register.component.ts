@@ -45,14 +45,14 @@ export class RegisterComponent implements OnInit {
 
 
   onRegister() {
-    console.log('You are about to REGISTER!');
-    console.log('Printing the form!');
-    console.log(this.registerForm);
-    console.log(this.registerForm.valid)
-    console.log('End of printing');
+    // console.log('You are about to REGISTER!'); // For DEBUGGING
+    // console.log('Printing the form!'); // For DEBUGGING
+    // console.log(this.registerForm); // For DEBUGGING
+    // console.log(this.registerForm.valid) // For DEBUGGING
+    // console.log('End of printing'); // For DEBUGGING
 
     if (!this.registerForm.valid) {
-      console.log('You are to be returned!');
+      // console.log('You are to be returned!'); // For DEBUGGING
       return // to prevent the user from hacking the HTML
     };
 
@@ -62,12 +62,12 @@ export class RegisterComponent implements OnInit {
     this.isLoading = true;
     this.authService.register(email, password).subscribe(
       responseData => {
-        console.log(responseData);
+        // console.log(responseData); // For DEBUGGING
         this.isLoading = false;
         this.router.navigate(['/blogs']);
       },
       errorMessage => {
-        console.log(errorMessage);
+        //console.log(errorMessage); // For DEBUGGING
         this.error = errorMessage;
         this.isLoading = false;
 
@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
     //this.registerForm.reset();
 
-    // this.router.navigate(['/home']);
+    // this.router.navigate(['/home']); // For different redirection.
 
   }
 

@@ -1,17 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth-services/auth.service';
-import { ControlContainer, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    trigger('formState', [
+      state('normal', style({
+        'background-color': 'transparent',
+        //transform: 'translateX(0)'
+      })),
+      state('danger', style({
+        'background-color': 'transparent',
+      })),
+      transition('normal => danger',
+        [style({
+          'background-color': 'red'
+        }),
+        animate(200, style({
+          'background-color': 'transparent'
+        })),
+        animate(200, style({
+          'background-color': 'red'
+        })),
+        animate(200, style({
+          'background-color': 'transparent'
+        })),
+        animate(200, style({
+          'background-color': 'red'
+        })),
+        animate(200)
+        ])
+    ])
+  ]
 })
 export class LoginComponent implements OnInit {
+  state = 'normal';
+
   loginForm: FormGroup;
   currentUsername = '';
   isLoading: boolean = false;
@@ -32,30 +63,33 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    console.log('You are about to login!');
-    console.log(this.loginForm.value);
+    //console.log('You are about to login!'); // For DEBUGGING
+    //console.log(this.loginForm.value); // For DEBUGGING
 
     const email = this.loginForm.value.username;
     const password = this.loginForm.value.password;
 
-    console.log(email);
+    // console.log(email); // For DEBUGGING
 
     this.isLoading = true;
     this.authService.login(email, password)
       .subscribe(
         responseData => {
-          console.log(responseData);
+          // console.log(responseData); // For DEBUGGING
           this.error = null;
           this.isLogging = true;
           setTimeout(() => {
             this.isLoading = false;
-            this.isLogging=false;
+            this.isLogging = false;
             this.router.navigate(['/blogs'])
           }, 2500);
 
         },
         errorMessage => {
-          console.log(errorMessage);
+          if (this.state == 'normal') {
+            this.state = 'danger';
+          }
+          // console.log(errorMessage); // For DEBUGGING
           this.error = errorMessage;
           this.isLoading = false;
 
@@ -69,6 +103,10 @@ export class LoginComponent implements OnInit {
 
   onHandleError() {
     this.error = null;
+  }
+
+  animationEnded() {
+    this.state = 'normal';
   }
 
 }

@@ -10,22 +10,21 @@ export class LoggingInterceptorService implements HttpInterceptor {
     constructor(private authService: AuthService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-       
 
         if (req.method === "POST") {
-            console.log('You are receiving a request from POST Http');
-            console.log('The req is');
-            console.log(req);
+            //console.log('You are receiving a request from POST Http'); // For DEBUGGING
+            //console.log('The req is'); // For DEBUGGING
+            //console.log(req); // For DEBUGGING
             return next.handle(req).pipe(
                 tap(event => {
-                    console.log(event)
-                if (event.type === HttpEventType.Response) {
-                    console.log('This is the event type:')
-                    console.log(event.body);
-            
-                }
-            }));
-        }
+                    // console.log(event) // For DEBUGGING
+                    if (event.type === HttpEventType.Response) {
+                        // console.log('This is the event type:')  // For DEBUGGING
+                        // console.log(event.body); // For DEBUGGING
+
+                    };
+                }));
+        };
 
         return next.handle(req);
         // this.isLoading = true;

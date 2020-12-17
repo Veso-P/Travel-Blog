@@ -11,13 +11,13 @@ import {Blog} from './blog.model'
   styleUrls: ['./blogs.component.css'],
   providers:[BlogService, FilterPipe]
 })
-export class BlogsComponent implements OnInit, OnDestroy {
+export class BlogsComponent implements OnInit, DoCheck, OnDestroy {
   filteredStatus = '';
   isLoading: boolean = false;
   sub;
   sub2;
-  limit: number = 3;
-  limitTrending: number = 3;
+  limit: number = 3; // Default value of 3 for the newest blogs (to be overwritten onInit)
+  limitTrending: number = 3; // Default value of 3 for the treding blogs (to be overwritten onInit)
   @Input() num;
   @Input() numTrending;
 
@@ -30,74 +30,59 @@ export class BlogsComponent implements OnInit, OnDestroy {
   constructor(private blogService: BlogService,
               private router: Router,
               private route: ActivatedRoute) {
-              console.log('Consturctor called.')
+              // console.log('Consturctor called.') // For DEBUGGING
   }
 
   ngOnInit() {
     this.isLoading = true;
-    console.log("YOU ARE IN THE BLOG-LIST component")
+    //console.log("YOU ARE IN THE BLOG-LIST component") // FOR DEBUGGING
     this.sub = this.route.data.subscribe(v => {
-      console.log('This is the data snapshot:')
-      console.log(v) 
+      //console.log('This is the data snapshot:') // FOR DEBUGGING
+      //console.log(v) // FOR DEBUGGING
       if (v.hasOwnProperty('trending')) {
         this.trending = v.trending;
-        console.log('is trending!')
+        //console.log('is trending!')
         this.newest = false;
-        console.log('Below are the params:')
-        console.log(this.route.snapshot.params);
+        //console.log('Below are the params:') // FOR DEBUGGING
+        //console.log(this.route.snapshot.params); // FOR DEBUGGING
       } 
       
       if (v.hasOwnProperty('newest')) {
         this.newest = v.newest;
-        console.log('is newest!')
+        //console.log('is newest!') // // FOR DEBUGGING
         this.trending = false;
-        console.log('Below are the params:')
-        console.log(this.route.snapshot.params);
+        //console.log('Below are the params:') // FOR DEBUGGING
+        //console.log(this.route.snapshot.params); // FOR DEBUGGING
       }
     });
 
     this.limit = Number(this.route.snapshot.params['num']);
     this.limitTrending = Number(this.route.snapshot.params['trending'])
-    console.log(this.route.snapshot.params);
+    // console.log(this.route.snapshot.params); // FOR DEBUGGING
 
-    //console.log(this.limit);
-    //this.blogs = this.blogService.getBlogs();
-    //console.log(typeof this.blogService.getBlogs());
+    //console.log(this.limit); // FOR DEBUGGING
+    //this.blogs = this.blogService.getBlogs(); // FOR DEBUGGING
+    //console.log(typeof this.blogService.getBlogs()); // FOR DEBUGGING
     this.blogService.getBlogs().subscribe(fetchedBlogs=> {
       this.blogs = fetchedBlogs;
       this.isLoading = false;
-      // console.log(typeof fetchedBlogs);
-      // fetchedBlogs.slice();
+      // console.log(typeof fetchedBlogs); // FOR DEBUGGING
+      // fetchedBlogs.slice(); // FOR DEBUGGING
     })
     
   }  
 
   ngDoCheck() {
     this.limit = Number(this.route.snapshot.params['num']);
-    // console.log(this.limit); //For Debugging
+    // console.log('The limit of newest blog is: ' + this.limit); // FOR DEBUGGING
     this.limitTrending = Number(this.route.snapshot.params['numTrending']);
-    // console.log(this.limitTrending); //For Debugging
+    // console.log(this.limitTrending); // FOR DEBUGGING
   }
   
   ngOnDestroy() {
     this.sub.unsubscribe(); 
   }
   
-
 }
 
 
-
-// OLD CODE
-// // sub // Due to code optimization moved to the child blog-list (operation 1)
-
-// constructor(private route: ActivatedRoute) { }
-
-// ngOnInit(): void {
-//   // this.sub = this.route.data.subscribe(v => console.log(v)); // Due to code optimization moved to the child blog-list (operation 1)
-
-// }
-
-// ngOnDestroy() {
-//   // this.sub.unsubscribe(); // Due to code optimization moved to the child blog-list (operation 1)
-// }
