@@ -18,8 +18,7 @@ import { UserRoutingModule } from './user-routing.module';
     ],
     imports: [      
         SharedModule,
-        UserRoutingModule,
-        
+        UserRoutingModule,      
 
     ],
 

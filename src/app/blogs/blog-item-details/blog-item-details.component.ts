@@ -5,14 +5,12 @@ import { take } from 'rxjs/operators'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+// For Animations
 import {trigger, state, style, transition, animate} from '@angular/animations';
-
 
 import { Blog } from '../blog.model'
 import { BlogService } from '../blog.service';
 import { AuthService } from 'src/app/user/auth-services/auth.service';
-
-
 
 
 @Component({

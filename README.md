@@ -34,17 +34,33 @@ In this application FireBase is used as a back-end. To solve the CORS issues a p
 
 ### Functionalities implemented in the application
 
+MODULARITY. To achieve a better application performance and improve code readability the code is split into a few modules:
+1) AppModule
+2) UserModule - bundles the components and features needed for the user functionality (i.e. login, register, profile page)
+3) BlogsModule - bundles the components and features needed for the blogs functionality (i.e. blogs, blog, create page, edit/details pages). This module also includes the PIPEs (see sections 'Usages of Pipes') used for the filtering of the blogs.
+4) LayoutModule - bundles the components and features needed for the Header, Footer, Aside HTML -elements.
+6) CommonPagesModule - bundles the functionality behind the Common Pages (static pages) in the application.
+7) SharedModule - bundles the  components and features needed for the Spinner (Loading Spinner) and the Alert messages.
+8) CoreModule - includes the Services, Guards and Interceptors.
+9) For routes are used - AppRoutingModule, UserRoutingModule, BlogsRoutingModule, CommonPagesRoutingModule.
+
+Important! CoreModule is included in the AppModule. Hence, its funcionality is accessible throught the application. SharedModule is imported in the other modules where needed.
+
+LAZY-LOADING implemented (check AppRoutingModule) for better UX and faster application performance
+Pre-LAZY-LOADING implemented as well, for better UX and faster application performance 
+
 Usage of FireBase as back-end.
 A. To register (signup) the user should enter a valid email (at least 6 characters long) and a passwored (at least 6 characters long). This is a FireBase built-in requirement.
 B. POST requests are used for user registration (signup), user login, creating a new blog. 
 C. PATCH requests are used for partial update of data (i.e. for editing a blog, or addig a comment to a blog). 
 D. GET requests are used for retrieving the data about the blogs.
 
+
 Usage of PIPES:
 A. Built-in pipes
 1) date:"medium" - in the BlogItemComponent to print the creation date of each blog in a human-readable format, because the fetched data in FireBase stores the date in nanoseconds as a number.
 2) uppercase  - in the BlogItemComponent to print the titles of each blog in UPPER CASE.
-3) slie: 0 : 150  - in the BlogItemComponent to print only the first 150 characters of the blog description on the main page.
+3) slice: 0 : 150  - in the BlogItemComponent to print only the first 150 characters of the blog description on the main page.
 
 B. Custom pipes.
 1) sortDate custom pipe implemented for the page "New Blogs'. The pipe filters the newest blogs by date. The user choose the number of how many blogs to filter.
@@ -88,6 +104,14 @@ is used to keep the operations needed for registering, logging-in, logging-out, 
 Usage of Models:
 A. User Model consisting of email, password, token, and token expiration.
 B. Blog Model consisting of id, name, descriptoin, image source, date of cration, creator ID and array of comments. 
+
+Usage of Interfaces:
+AuthResponseData interface is used for the FireBase response
+
+Usage of Animations:
+Simple animations are implemented in:
+ the login process: if the login is unsuccessful, the background starts to blink red.
+ the edit blog page: During editing a blog, the background changes from transparent to lightblue.    
 
 Using of bcrypt for additional hasihg of the tokens.
 
