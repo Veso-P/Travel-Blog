@@ -1,3 +1,22 @@
+<nav class="navbar navbar-default">
+        <ul>
+                <li routerLinkActive="myactiveclass"><input [(ngModel)]="numTrending" type="number" min="0"
+                                style="width: 45px;"><a routerLink="/blogs/trending/{{numTrending}}"
+                                style="text-align: left; padding: 10px;">Trending Blogs</a></li>
+
+                <li routerLinkActive="myactiveclass"><input [(ngModel)]="num" type="number" min="0"
+                                style="width: 45px;"> <a routerLink="/blogs/new/{{num}}" style="padding: 10px;">New
+                                Blogs</a> </li>
+
+                <li *ngIf="isAuthenticated"><button class="btn btn-info" (click)="onNewBlog()"
+                                style="text-align: center; padding: 10px;">Create New Blog</button></li>
+        </ul>
+</nav>
+
+
+
+<!-- OLD TEMPLATE:
+
 <aside style="width: 15%; display:inline-block; padding: 20px;">
     <nav class="navbar navbar-default" >        
         
@@ -8,4 +27,4 @@
        <p *ngIf="isAuthenticated"><button  class="btn btn-info" (click)="onNewBlog()" style="text-align: center; padding: 10px;">Create New Blog</button></p>
       
     </nav>
-</aside>
+</aside> -->

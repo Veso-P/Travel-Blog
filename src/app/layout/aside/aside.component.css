@@ -1,4 +1,21 @@
-:host {
+/* :host {
     display: flex, inline;
     height: 100%;
-}
+} */
+
+nav {
+    float: left;
+    width: 15%;
+    height: auto; /* 300pxonly for demonstration, should be removed */
+    background: rgb(228, 224, 224);
+    padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0px;
+  }
+  nav ul li {
+    padding: 5px;
+  }

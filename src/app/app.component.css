@@ -1,4 +1,12 @@
-:host {
+/* :host {
     display: flex, inline;
     height: 100%;
-}
+} */
+
+article {
+    float: left;
+    padding: 20px;
+    width: 85%;
+    background-color: #faf9f9;
+    height: auto; /* only for demonstration, should be removed */
+  }

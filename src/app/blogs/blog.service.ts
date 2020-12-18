@@ -24,7 +24,27 @@ export class BlogService {
         // console.log(blogsArray); // FOR DEBUGGING
         // let sortedByCreation = blogsArray.sort((a, b) => b.createdAt - a.createdAt).slice(0, 2); // Old Filter
         // return sortedByCreation;
+        //console.log(typeof blogsArray);
+        //console.log(blogsArray)
         return blogsArray;
+      }))
+    //console.log ('This is the array' + arr) // FOR DEBUGGING
+    //return this.blogs.slice(); // FOR DEBUGGING
+
+  }
+
+  getBlog(blogId: string) {
+    return this.http.get<Blog>(`/blogs/blogs/${blogId}.json`)
+      .pipe(map((responseData) => {
+        //console.log('This is the response:'); // FOR DEBUGGING
+        //console.log(responseData); // FOR DEBUGGING
+        // let blogArray: Blog[] = [];
+        // blogArray.push({blogId: responseData})
+        
+        responseData['id'] = blogId;
+        
+
+        return responseData;
       }))
     //console.log ('This is the array' + arr) // FOR DEBUGGING
     //return this.blogs.slice(); // FOR DEBUGGING

@@ -10,8 +10,8 @@ export class FilterPipe implements PipeTransform {
       return value;
     }
 
-    console.log(filterString)
-    console.log(value);
+    //console.log(filterString) // For DEBUGGING
+    //console.log(value); // For DEBUGGING
 
     const resultArray = [];
 

@@ -71,11 +71,10 @@
                 <div class="form-group">
                     <textarea name="comment" formControlName="comment" rows="5"
                         class="form-control"> Write a comment! </textarea>
-                    <!-- <span *ngIf="!commentForm.get('comment').valid && commentForm.get('comment').touched"
-                        class="help-block" style="color:red;">Comment should be at least 5 characters long!
-                        long!</span> -->
-                    <button class="btn btn-primary" type="submit">Comment!</button> 
-                    <!-- [disabled]="commentForm.status == 'INVALID'" -->
+                    <span *ngIf="!commentForm.get('comment').valid && commentForm.get('comment').touched"
+                        class="help-block" style="color:red;">Comment should be at least 5 characters long!</span>
+                    <button class="btn btn-primary" type="submit" [disabled]="commentForm.status == 'INVALID'">Comment!</button> 
+                    
                 </div>
             </form>
 

@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 // For Animations
-import {trigger, state, style, transition, animate} from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { Blog } from '../blog.model'
 import { BlogService } from '../blog.service';
@@ -19,12 +19,12 @@ import { AuthService } from 'src/app/user/auth-services/auth.service';
   styleUrls: ['./blog-item-details.component.css'],
   animations: [
     trigger('pageState', [
-      state('normal', style ({
-        'background-color': 'transperant', 
-        transform:'translateX(0)'       
+      state('normal', style({
+        'background-color': 'transparent',
+        transform: 'translateX(0)'
       })),
-      state('colored', style ({
-        'background-color': 'lightblue',  
+      state('colored', style({
+        'background-color': 'lightblue',
       })),
       transition('normal <=> colored', animate(5000))
     ])
@@ -33,11 +33,11 @@ import { AuthService } from 'src/app/user/auth-services/auth.service';
 export class BlogItemDetailsComponent implements OnInit {
   @Input() blog: Blog;
   id: string;
-  selectedBlog: Blog;
+  selectedBlog;
   allowComment: Boolean = false;
   allowEdit: Boolean = false;
   isLoading: boolean = false;
-  isDeleted: boolean = false;  
+  isDeleted: boolean = false;
   pleaseEdit: boolean = false;
   buttonName: string = 'Edit'; //Default value of 'Edit' used for the Toggle Button
 
@@ -57,7 +57,7 @@ export class BlogItemDetailsComponent implements OnInit {
 
   //Authentication check
   isAuthenticated = false;
-  private userSubscription : Subscription;
+  private userSubscription: Subscription;
 
   constructor(private blogService: BlogService,
     private route: ActivatedRoute,
@@ -68,11 +68,11 @@ export class BlogItemDetailsComponent implements OnInit {
   // constructor(private route: ActivatedRoute) { } 
 
   ngOnInit(): void {
-    this.isLoading=true;
-    
+    this.isLoading = true;
+
     this.id = this.route.snapshot.params['id']
 
-      this.authService.user.pipe(take(1)).subscribe(user => {
+    this.authService.user.pipe(take(1)).subscribe(user => {
       this.isAuthenticated = !user ? false : true;
       //console.log('Data about the user:'); // For DEBUGGING
       //console.log(user); // For DEBUGGING
@@ -82,88 +82,97 @@ export class BlogItemDetailsComponent implements OnInit {
         this.allowComment = true;
         this.commenterEmail = user.email;
       };
-      
+
     });
 
     //console.log('The id is: ' + this.id); // For DEBUGGING
     let userId = '';
-    let info =JSON.parse(localStorage.getItem('userInfo'));
-    if (info && info.hasOwnProperty('id')){
+    let info = JSON.parse(localStorage.getItem('userInfo'));
+    if (info && info.hasOwnProperty('id')) {
       userId = info.id;
       //console.log('The user is: ' + userId); // For DEBUGGING
-    };    
-    
-    this.blogService.getBlogs().subscribe(fetchedBlogs => {
-      this.selectedBlog = fetchedBlogs.find(item => item.id == this.id);
+    };
+
+
+    this.blogService.getBlog(this.id).subscribe(fetchedBlog => {
+      this.selectedBlog = fetchedBlog;
       // console.log(typeof fetchedBlogs); // For DEBUGGING
-      // console.log(this.selectedBlog);// For DEBUGGING
-      this.isLoading=false
-      if (this.selectedBlog.creator == userId){
+      //console.log(this.selectedBlog);// For DEBUGGING
+
+      this.isLoading = false
+      if (this.selectedBlog.creator == userId) {
         this.allowEdit = true;
       };
 
       this.editForm = new FormGroup({
         'name': new FormControl(this.selectedBlog.name, [Validators.required, Validators.minLength(6)]), //  
         'imagePath': new FormControl(this.selectedBlog.imagePath, Validators.required),
-        'description': new FormControl(this.selectedBlog.description, [Validators.required, Validators.minLength(50)])   
+        'description': new FormControl(this.selectedBlog.description, [Validators.required, Validators.minLength(50)])
       });
-      
+
       this.editForm.valueChanges.subscribe(
         (value) => { this.dataToSend = value }
       );
       // fetchedBlogs.slice();
     });
 
+
     this.commentForm = new FormGroup({
       'comment': new FormControl(null, [Validators.required, Validators.minLength(6)]), // 
     });
-    
+
   }
 
   // Add comment functionality integrated
   onAddComment() {
     // let modifiedArray = JSON.parse(this.selectedBlog.comments); // For DEBUGGING 
 
-    let comment = '[' + (new Date()).toString().slice(0,24) +'] '+this.commenterEmail + ': ' + this.commentForm.value.comment ;
-    // console.log('You are about to add comment!'); // For DEBUGGING
-    //modifiedArray.push(comment);
+    let comment = '[' + (new Date()).toString().slice(0, 24) + '] ' + this.commenterEmail + ': ' + this.commentForm.value.comment;
 
-    if (this.selectedBlog.hasOwnProperty('comments')) {
-      this.selectedBlog.comments.push(comment);
+    if (this.commentForm.value.comment.length < 5) {
+      this.authService.logout();
     } else {
-      this.selectedBlog.comments = [comment];
-    };
+      // console.log('You are about to add comment!'); // For DEBUGGING
+      //modifiedArray.push(comment);
 
-  
-    this.isLoading = true; 
-    
-    // this.dataToSend.comments = ['first comment', 'second comment']; // For DEBUGGING - used for some dummy comments
-    this.authService.user.pipe(take(1)).subscribe(user => {
-      // console.log(user); // For DEBUGGING
-      this.commentToSend = this.selectedBlog.comments;
-      // console.log('You are going to send the array of comments:'); // For DEBUGGING
-      let modifiedString = `{"comments": ["${this.commentToSend.join('", "')}"]}`;
-      // console.log(modifiedString); // For DEBUGGING
-      this.http.patch(`https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app/blogs/${this.selectedBlog.id}.json?`, modifiedString ).subscribe(responseData => {
-        //console.log(`this is the response of the update:`) // For DEBUGGING
-        //console.log(responseData); // For DEBUGGING
-        
-        this.isLoading = false;        
-       
-        this.commentForm.reset();       
+      if (this.selectedBlog.hasOwnProperty('comments')) {
+        this.selectedBlog.comments.push(comment);
+      } else {
+        this.selectedBlog.comments = [comment];
+      };
+
+
+      this.isLoading = true;
+
+      // this.dataToSend.comments = ['first comment', 'second comment']; // For DEBUGGING - used for some dummy comments
+      this.authService.user.pipe(take(1)).subscribe(user => {
+        // console.log(user); // For DEBUGGING
+        this.commentToSend = this.selectedBlog.comments;
+        // console.log('You are going to send the array of comments:'); // For DEBUGGING
+        let modifiedString = `{"comments": ["${this.commentToSend.join('", "')}"]}`;
+        // console.log(modifiedString); // For DEBUGGING
+        this.http.patch(`https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app/blogs/${this.selectedBlog.id}.json?`, modifiedString).subscribe(responseData => {
+          //console.log(`this is the response of the update:`) // For DEBUGGING
+          //console.log(responseData); // For DEBUGGING
+
+          this.isLoading = false;
+
+          this.commentForm.reset();
+        });
+
       });
-      
-    });
+    }
+
   };
 
   onEditBlog() {
-    this.pleaseEdit=!this.pleaseEdit;
+    this.pleaseEdit = !this.pleaseEdit;
     if (this.state == 'normal') {
       this.state = 'colored';
-    } else if ( this.state == 'colored'){
+    } else if (this.state == 'colored') {
       this.state = 'normal';
     }
-    if(this.pleaseEdit == true) {
+    if (this.pleaseEdit == true) {
       this.buttonName = "Cancel Editing!"
     } else {
       this.buttonName = 'Edit';
@@ -176,13 +185,13 @@ export class BlogItemDetailsComponent implements OnInit {
 
     // send HTTP DELETE request (subscription is obligatory as it is Observable)
     // this.http.delete(`/blogs/blogs/${this.id}.json`).subscribe(responseData => {console.log(responseData)} ); // used for testing!
-    
+
     this.authService.user.pipe(take(1)).subscribe(user => {
       //console.log(user); // For DEBUGGING
 
       this.http.delete(`/blogs/blogs/${this.id}.json?`).subscribe(responseData => {
         // console.log(responseData);// For DEBUGGING
-        
+
         this.isDeleted = true;
 
         setTimeout(() => {
@@ -202,33 +211,58 @@ export class BlogItemDetailsComponent implements OnInit {
   sendEdit() {
     // console.log('You are going to update the blog!') // For DEBUGGING
     // console.log(this.editForm.value); // For DEBUGGING
-    this.updateToSend=this.editForm.value;
+    this.updateToSend = this.editForm.value;
 
-    this.isLoading = true; 
-    
-       // this.dataToSend.comments = ['first comment', 'second comment']; // For DEBUGGING - some dummy comments
+    this.isLoading = true;
+
+    // this.dataToSend.comments = ['first comment', 'second comment']; // For DEBUGGING - some dummy comments
     this.authService.user.pipe(take(1)).subscribe(user => {
       // console.log(user); // For DEBUGGING
-      this.http.patch<{}>(`https://my-exam-1e19a.firebaseio.com/blogs/${this.selectedBlog.id}.json?`, this.updateToSend).subscribe(responseData => {
+
+      this.http.patch<{}>(`https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app/blogs/${this.selectedBlog.id}.json?`, this.updateToSend).subscribe(responseData => {
         //console.log(`this is the response of the update:`) // For DEBUGGING
         // console.log(responseData); // For DEBUGGING
-        
+
         this.selectedBlog.name = this.editForm.value.name;
-        this.selectedBlog.description=this.editForm.value.description;
-        this.selectedBlog.imagePath=this.editForm.value.imagePath;
+        this.selectedBlog.description = this.editForm.value.description;
+        this.selectedBlog.imagePath = this.editForm.value.imagePath;
         this.isLoading = false;
         //this.pleaseEdit = !this.pleaseEdit; // Old code for toggle-button
         this.onEditBlog();
-       
-        this.router.navigate(['/blogs/'+this.selectedBlog.id]);       
+
+        this.router.navigate(['/blogs/' + this.selectedBlog.id]);
       });
-      
+
     });
 
-    // send HTTP request (subscription is obligatory as it is Observable)
+    // send HTTP request (subscription is obligatory as it is Observable);
 
     // this.createForm.reset()  // To reset the form, if there is no redirection.
   }
-  
+
 
 }
+
+
+// OLD FUNCTIONALITY:
+// this.blogService.getBlogs().subscribe(fetchedBlogs => {
+    //   this.selectedBlog = fetchedBlogs.find(item => item.id == this.id);
+    //   // console.log(typeof fetchedBlogs); // For DEBUGGING
+    //   console.log(this.selectedBlog);// For DEBUGGING
+    //   this.isLoading=false
+    //   if (this.selectedBlog.creator == userId){
+    //     this.allowEdit = true;
+    //   };
+
+    //   this.editForm = new FormGroup({
+    //     'name': new FormControl(this.selectedBlog.name, [Validators.required, Validators.minLength(6)]), //  
+    //     'imagePath': new FormControl(this.selectedBlog.imagePath, Validators.required),
+    //     'description': new FormControl(this.selectedBlog.description, [Validators.required, Validators.minLength(50)])   
+    //   });
+
+    //   this.editForm.valueChanges.subscribe(
+    //     (value) => { this.dataToSend = value }
+    //   );
+    //   // fetchedBlogs.slice();
+    // });
+
