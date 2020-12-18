@@ -1,6 +1,9 @@
 # TravelBlog
 A single page application for reading, commenting, and creating travel blogs. This project (A travel blog) will be created with Angular and FireBase as a back-end. For better styling Bootstrap is used.
 
+The application is deployed on Firebase under the uri:
+https://travelblog171220208315.web.app
+
 ## Main Idea
 The application will have two parts:
 

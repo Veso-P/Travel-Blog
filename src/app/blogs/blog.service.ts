@@ -11,10 +11,14 @@ export class BlogService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getBlogs() {
-    return this.http.get<{ [key: string]: Blog }>('/blogs/blogs.json')
+    //return this.http.get<JSON>('/blogs/blogs.json')
+    return this.http.get<{ [key: string]: Blog }>('https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app/blogs.json')
       .pipe(map((responseData) => {
-        //console.log('This is the response:'); // FOR DEBUGGING
-        //console.log(responseData); // FOR DEBUGGING
+        console.log('This is the response:'); // FOR DEBUGGING
+        console.log(typeof responseData); // FOR DEBUGGING
+        //responseData = JSON.parse(responseData);
+        
+     
         let blogsArray: Blog[] = [];
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
@@ -34,7 +38,7 @@ export class BlogService {
   }
 
   getBlog(blogId: string) {
-    return this.http.get<Blog>(`/blogs/blogs/${blogId}.json`)
+    return this.http.get<Blog>(`https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app/blogs/${blogId}.json`)
       .pipe(map((responseData) => {
         //console.log('This is the response:'); // FOR DEBUGGING
         //console.log(responseData); // FOR DEBUGGING

@@ -189,7 +189,7 @@ export class BlogItemDetailsComponent implements OnInit {
     this.authService.user.pipe(take(1)).subscribe(user => {
       //console.log(user); // For DEBUGGING
 
-      this.http.delete(`/blogs/blogs/${this.id}.json?`).subscribe(responseData => {
+      this.http.delete(`https://travelblog1-default-rtdb.europe-west1.firebasedatabase.app/blogs/${this.id}.json?`).subscribe(responseData => {
         // console.log(responseData);// For DEBUGGING
 
         this.isDeleted = true;
